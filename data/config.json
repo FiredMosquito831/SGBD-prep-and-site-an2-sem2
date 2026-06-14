@@ -1,0 +1,30 @@
+{
+  "title": "SGBD MCQ Practice",
+  "subtitle": "PL/SQL Databases",
+  "displayOrder": [
+    "sgbd_uploaded_master"
+  ],
+  "defaultSet": "sgbd_uploaded_master",
+  "links": {
+    "youtube": "https://www.youtube.com/"
+  },
+  "sets": {
+    "sgbd_uploaded_master": {
+      "id": "sgbd_uploaded_master",
+      "displayName": "SGBD Uploaded Master",
+      "shortName": "SGBD Master",
+      "icon": "ph-database",
+      "colorClass": "blue",
+      "dataFile": "sets/sgbd_uploaded_master.json",
+      "englishDataFile": "sets_en/sgbd_uploaded_master.json",
+      "chapters": null,
+      "presets": [
+        30,
+        50,
+        100,
+        "all"
+      ],
+      "defaultCount": 30
+    }
+  }
+}

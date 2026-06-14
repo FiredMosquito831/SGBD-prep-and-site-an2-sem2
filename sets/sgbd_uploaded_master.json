@@ -1,0 +1,4238 @@
+[
+  {
+    "id": 1,
+    "question": "Global variables declared in a package specification:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Are visible only in the package body."
+      },
+      {
+        "isCorrect": false,
+        "text": "Are created at log-on and destroyed at commit."
+      },
+      {
+        "isCorrect": true,
+        "text": "Persist for the duration of the current session and can store state between calls to any subprogram in the package."
+      },
+      {
+        "isCorrect": false,
+        "text": "Persist for all sessions simultaneously."
+      },
+      {
+        "isCorrect": false,
+        "text": "Cannot be initialized in the declaration."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Consider the PL/SQL block:\nSET SERVEROUTPUT ON\nDECLARE\n  CURSOR c IS SELECT department_id FROM departments;\n  v_id departments.department_id%TYPE;\nBEGIN\n  OPEN c;\n  DBMS_OUTPUT.PUT_LINE(c%ROWCOUNT);\n  FETCH c INTO v_id;\n  CLOSE c;\nEND;\nThe table exists and has rows. What will it display?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "1"
+      },
+      {
+        "isCorrect": false,
+        "text": "NULL"
+      },
+      {
+        "isCorrect": false,
+        "text": "Raises INVALID_CURSOR exception"
+      },
+      {
+        "isCorrect": false,
+        "text": "2"
+      },
+      {
+        "isCorrect": true,
+        "text": "0"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "What will the following PL/SQL block display?\nSET SERVEROUTPUT ON\nDECLARE\n  TYPE t_ids IS TABLE OF employees.employee_id%TYPE;\n  v_ids t_ids := t_ids(101,102,103);\nBEGIN\n  FORALL i IN v_ids.FIRST .. v_ids.LAST\n    UPDATE employees\n      SET salary = salary + 50\n      WHERE employee_id = v_ids(i);\n  DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT);\nEND;\nThe employees table exists and contains all three employees.",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Raises VALUE_ERROR exception"
+      },
+      {
+        "isCorrect": false,
+        "text": "NULL"
+      },
+      {
+        "isCorrect": true,
+        "text": "3"
+      },
+      {
+        "isCorrect": false,
+        "text": "1"
+      },
+      {
+        "isCorrect": false,
+        "text": "Raises INVALID_CURSOR exception"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "What does the following PL/SQL block display?\nSET SERVEROUTPUT ON\nDECLARE\n  CURSOR c IS SELECT department_id FROM departments WHERE ROWNUM <= 1;\n  v_id departments.department_id%TYPE;\nBEGIN\n  OPEN c;\n  FETCH c INTO v_id;\n  IF c%FOUND THEN\n    DBMS_OUTPUT.PUT_LINE('X');\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('Y');\n  END IF;\n  FETCH c INTO v_id;\n  IF c%NOTFOUND THEN\n    DBMS_OUTPUT.PUT_LINE('Z');\n  END IF;\n  CLOSE c;\nEND;\nThe departments table exists and is populated.",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Nothing"
+      },
+      {
+        "isCorrect": false,
+        "text": "Y"
+      },
+      {
+        "isCorrect": false,
+        "text": "The block does not compile"
+      },
+      {
+        "isCorrect": true,
+        "text": "X and Z"
+      },
+      {
+        "isCorrect": false,
+        "text": "Y and Z"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Which PL/SQL loop automatically handles OPEN, FETCH, and CLOSE operations for an explicit cursor?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "FOR i IN 1..SQL%ROWCOUNT LOOP ... END LOOP"
+      },
+      {
+        "isCorrect": false,
+        "text": "GOTO c%ROWCOUNT"
+      },
+      {
+        "isCorrect": false,
+        "text": "WHILE ... LOOP ... END LOOP"
+      },
+      {
+        "isCorrect": false,
+        "text": "LOOP ... EXIT WHEN ... END LOOP"
+      },
+      {
+        "isCorrect": true,
+        "text": "FOR r IN c LOOP ... END LOOP"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "What will the following block display?\nSET SERVEROUTPUT ON\nBEGIN\n  UPDATE employees\n    SET salary = salary + 10\n    WHERE department_id = 30;\n  IF SQL%ISOPEN THEN\n    DBMS_OUTPUT.PUT_LINE('Is opened');\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('Is not opened');\n  END IF;\nEND;",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Is opened"
+      },
+      {
+        "isCorrect": false,
+        "text": "Compilation error"
+      },
+      {
+        "isCorrect": false,
+        "text": "NULL"
+      },
+      {
+        "isCorrect": false,
+        "text": "Raises INVALID_CURSOR exception"
+      },
+      {
+        "isCorrect": true,
+        "text": "Is not opened"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Inside a trigger, the test IF INSERTING THEN ... is available:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Only in BEFORE statement triggers."
+      },
+      {
+        "isCorrect": false,
+        "text": "Only in compound triggers."
+      },
+      {
+        "isCorrect": false,
+        "text": "Only in AFTER triggers."
+      },
+      {
+        "isCorrect": false,
+        "text": "In any PL/SQL block."
+      },
+      {
+        "isCorrect": true,
+        "text": "In any trigger (row or statement) to distinguish the DML event that triggered it."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Which of the following activities are specific to a DBMS:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "query optimization"
+      },
+      {
+        "isCorrect": true,
+        "text": "defining the database structure"
+      },
+      {
+        "isCorrect": true,
+        "text": "data security"
+      },
+      {
+        "isCorrect": true,
+        "text": "system administration"
+      },
+      {
+        "isCorrect": false,
+        "text": "compiling programs written in a high-level language"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Which of the following statements are true:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "the PL/SQL block contains SQL command sequences"
+      },
+      {
+        "isCorrect": true,
+        "text": "the PL/SQL block contains PL/SQL-specific command sequences"
+      },
+      {
+        "isCorrect": true,
+        "text": "exceptions can be defined in the PL/SQL block"
+      },
+      {
+        "isCorrect": false,
+        "text": "the PL/SQL block contains only SQL commands"
+      },
+      {
+        "isCorrect": true,
+        "text": "the PL/SQL block can contain nested PL/SQL blocks"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Which of the following statements are correct (question related to cursors):",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "an implicit cursor is used"
+      },
+      {
+        "isCorrect": true,
+        "text": "a repetitive control structure is used"
+      },
+      {
+        "isCorrect": true,
+        "text": "an explicit cursor is defined"
+      },
+      {
+        "isCorrect": true,
+        "text": "the OPEN statement is used to open the cursor"
+      },
+      {
+        "isCorrect": true,
+        "text": "the CLOSE statement is used to close the cursor"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "question": "Consider the following PL/SQL command sequence (with CREATE TABLE mesaje, cursor c1, FETCH, INSERT INTO mesaje). Which statements are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "an implicit cursor is tested"
+      },
+      {
+        "isCorrect": true,
+        "text": "a table is created"
+      },
+      {
+        "isCorrect": true,
+        "text": "an explicit cursor is defined"
+      },
+      {
+        "isCorrect": true,
+        "text": "a repetitive control structure is used"
+      },
+      {
+        "isCorrect": false,
+        "text": "two composite variables are defined"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "question": "The %FOUND attribute characterizes:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "an implicit cursor"
+      },
+      {
+        "isCorrect": true,
+        "text": "an explicit cursor"
+      },
+      {
+        "isCorrect": false,
+        "text": "a virtual table"
+      },
+      {
+        "isCorrect": false,
+        "text": "a predefined exception"
+      },
+      {
+        "isCorrect": false,
+        "text": "a record"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "question": "Consider the PL/SQL block: (DECLARE nota_examen NUMBER; BEGIN IF nota_examen >= 5 THEN dbms_output.put_line('passed!'); ELSE dbms_output.put_line('nepassed!'); END IF; END;) Care dintre următoarele afirmații are erroneous:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "“not passed!” is displayed"
+      },
+      {
+        "isCorrect": true,
+        "text": "“not passed!” is displayed if the obtained grade is less than 5 and “passed!” otherwise"
+      },
+      {
+        "isCorrect": true,
+        "text": "“passed!” is displayed"
+      },
+      {
+        "isCorrect": true,
+        "text": "the block will run, but nothing will be displayed"
+      },
+      {
+        "isCorrect": false,
+        "text": "is utilizată o structure de control alternative"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "question": "Which of the following PL/SQL variable declarations are correct:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "v_data_comanda DATE:= SYSDATE;"
+      },
+      {
+        "isCorrect": true,
+        "text": "v_nume VARCHAR2(15) DEFAULT 'Ion';"
+      },
+      {
+        "isCorrect": false,
+        "text": "v_prenume VARCHAR2(5) := 'Anastasia Nicoleta';"
+      },
+      {
+        "isCorrect": true,
+        "text": "v_test BOOLEAN NOT NULL:= FALSE;"
+      },
+      {
+        "isCorrect": false,
+        "text": "v_salariul NUMBER NOT NULL;"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "question": "Consider the following command sequence: FOR i IN t.FIRST .. t.LAST LOOP IF t.EXISTS(i) THEN DBMS_OUTPUT.PUT_LINE(t(i)); END IF; END LOOP; Which of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "EXISTS(i) denotes a method of collection t"
+      },
+      {
+        "isCorrect": false,
+        "text": "the values corresponding to FIRST and LAST must be determined before the FOR structure through a query"
+      },
+      {
+        "isCorrect": false,
+        "text": "to be used in the FOR structure, variable i must be declared in the declarative section"
+      },
+      {
+        "isCorrect": true,
+        "text": "EXISTS(i) returns TRUE if element i of the collection exists"
+      },
+      {
+        "isCorrect": false,
+        "text": "EXISTS(i) denotes a relational operator"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "question": "Consider the PL/SQL block (with 5 exception constructs: A, B, C, D, E). Which of the above are correct?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "A: EXCEPTION WHEN NO_DATA_FOUND THEN secv_comenzi1; WHEN OTHERS THEN secv_comenzi2; END;"
+      },
+      {
+        "isCorrect": true,
+        "text": "B: EXCEPTION WHEN TOO_MANY_ROWS THEN secv_comenzi1; END;"
+      },
+      {
+        "isCorrect": true,
+        "text": "C: EXCEPTION WHEN NO_DATA_FOUND OR TOO_MANY_ROWS THEN secv_comenzi1; WHEN OTHERS THEN secv_comenzi3; END;"
+      },
+      {
+        "isCorrect": true,
+        "text": "D: EXCEPTION WHEN OTHERS THEN secv_comenzi1; END;"
+      },
+      {
+        "isCorrect": false,
+        "text": "E: EXCEPTION WHEN OTHERS THEN secv_comenzi1; WHEN NO_DATA_FOUND THEN secv_comenzi2; END;"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "question": "A DBMS enables the following activities:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "data access"
+      },
+      {
+        "isCorrect": true,
+        "text": "data security"
+      },
+      {
+        "isCorrect": true,
+        "text": "defining the database structure"
+      },
+      {
+        "isCorrect": true,
+        "text": "database maintenance"
+      },
+      {
+        "isCorrect": true,
+        "text": "integritatea datelor"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "question": "The following command sequence is given: (CREATE OR REPLACE PROCEDURE modifica, CREATE OR REPLACE PROCEDURE exemplu, EXECUTE exemplu). Which of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "se uses callul unei proceduri din altă procedură"
+      },
+      {
+        "isCorrect": false,
+        "text": "se will generate an error because procedure exemplu not are parameters"
+      },
+      {
+        "isCorrect": false,
+        "text": "se will generate an error becauwillriable i usedă în structure repetitive not a fost declarată"
+      },
+      {
+        "isCorrect": true,
+        "text": "se creates două proceduri stocate"
+      },
+      {
+        "isCorrect": true,
+        "text": "se modifică limit de credit for 4 clients"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "question": "The attributes of an explicit cursor are:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "ISOPEN, NOTFOUND, ROWCOUNT"
+      },
+      {
+        "isCorrect": true,
+        "text": "ROWCOUNT, FOUND, ISOPEN"
+      },
+      {
+        "isCorrect": false,
+        "text": "FETCH, CLOSE, OPEN"
+      },
+      {
+        "isCorrect": false,
+        "text": "ROWNUM, NOTFOUND, FOUND"
+      },
+      {
+        "isCorrect": false,
+        "text": "ROWTYPE, FOUND, ROWCOUNT"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "question": "Among the functions of a DBMS are:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "description, manipulation, administration"
+      },
+      {
+        "isCorrect": false,
+        "text": "use, administration, design"
+      },
+      {
+        "isCorrect": true,
+        "text": "description, manipulation, use"
+      },
+      {
+        "isCorrect": false,
+        "text": "modification, administration, use"
+      },
+      {
+        "isCorrect": false,
+        "text": "description, modification, administration"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "question": "Specify which of the following activities are specific to a DBMS:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "creating the class diagram"
+      },
+      {
+        "isCorrect": false,
+        "text": "ensuring data security"
+      },
+      {
+        "isCorrect": true,
+        "text": "ensuring access to data"
+      },
+      {
+        "isCorrect": false,
+        "text": "creating the entity-relationship diagram"
+      },
+      {
+        "isCorrect": false,
+        "text": "building graphical interfaces"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "question": "The PL/SQL language does not directly support the commands:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "ALTER"
+      },
+      {
+        "isCorrect": true,
+        "text": "CREATE, DROP"
+      },
+      {
+        "isCorrect": false,
+        "text": "COMMIT, SAVEPOINT"
+      },
+      {
+        "isCorrect": true,
+        "text": "GRANT"
+      },
+      {
+        "isCorrect": false,
+        "text": "DELETE, UPDATE"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "question": "The following command sequence is given:\ndeclare\n  nota_examen number;\nbegin\n  if nota_examen >= 5 then\n    dbms_output.put_line('passed!');\n  else\n    dbms_output.put_line('nepassed!');\n  end if;\nend;\n/\nWhich statements are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "NULL will be displayed"
+      },
+      {
+        "isCorrect": false,
+        "text": "“not passed!” is displayed if the obtained grade is less than 5 and “passed!” otherwise"
+      },
+      {
+        "isCorrect": false,
+        "text": "“passed!” is displayed"
+      },
+      {
+        "isCorrect": false,
+        "text": "nothing will be displayed"
+      },
+      {
+        "isCorrect": true,
+        "text": "“not passed!” is displayed"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "question": "What will the PL/SQL block display:\nDECLARE\n  CURSOR c IS SELECT nume FROM employees;\n  r c%ROWTYPE;\nBEGIN\n  FETCH c INTO r;\n  DBMS_OUTPUT.PUT_LINE('The name is '||r.nume);\nEXCEPTION\n  WHEN NO_DATA_FOUND THEN DBMS_OUTPUT.PUT_LINE('A');\n  WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('B');\nEND;\n/",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "will display the names of all employees"
+      },
+      {
+        "isCorrect": true,
+        "text": "will display B"
+      },
+      {
+        "isCorrect": false,
+        "text": "will generate an error"
+      },
+      {
+        "isCorrect": false,
+        "text": "will display A"
+      },
+      {
+        "isCorrect": false,
+        "text": "will display the name of the first employee"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "question": "Din următoarea structure de bloc PL/SQL:\nDECLARE\n  Instructiuni ;\nBEGIN\n  Instructiuni ;\nEXCEPTION\n  Instructiuni ;\nEND;",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "are opționale toate părțile"
+      },
+      {
+        "isCorrect": false,
+        "text": "is missing parte for tratarea erorilor"
+      },
+      {
+        "isCorrect": true,
+        "text": "is obligatorie doar partea executable"
+      },
+      {
+        "isCorrect": false,
+        "text": "are obligatorii toate părțile"
+      },
+      {
+        "isCorrect": false,
+        "text": "is obligatorie doar partea declarative"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "question": "Se consideră următoarele construcții:\nA. EXCEPTION WHEN NO_DATA_FOUND THEN secv_comenzi1; WHEN OTHERS THEN secv_comenzi2; END;\nB. EXCEPTION WHEN TOO_MANY_ROWS THEN secv_comenzi1; END;\nC. EXCEPTION WHEN NO_DATA_FOUND THEN secv_comenzi1; WHEN NO_DATA_FOUND THEN secv_comenzi2; WHEN OTHERS THEN secv_comenzi3; END;\nD. EXCEPTION WHEN OTHERS THEN secv_comenzi1; END;\nE. EXCEPTION WHEN OTHERS THEN secv_comenzi1; WHEN NO_DATA_FOUND THEN secv_comenzi2; END;\nWhich of the above are correct?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "A"
+      },
+      {
+        "isCorrect": true,
+        "text": "D"
+      },
+      {
+        "isCorrect": true,
+        "text": "B"
+      },
+      {
+        "isCorrect": false,
+        "text": "E"
+      },
+      {
+        "isCorrect": false,
+        "text": "C"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "question": "Pentru un cursor used in a FOR loop se vor elimina operațiile explicite de:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "deschidere a cursorului"
+      },
+      {
+        "isCorrect": true,
+        "text": "închidere a cursorului"
+      },
+      {
+        "isCorrect": true,
+        "text": "încărcare de data din linia current din cursor în variabile"
+      },
+      {
+        "isCorrect": false,
+        "text": "declarare a cursorului"
+      },
+      {
+        "isCorrect": false,
+        "text": "optimizare a cursorului"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "question": "Consider the PL/SQL block:\nCREATE OR REPLACE PROCEDURE sal_mediu (p_sal_mediu OUT NUMBER)\nIS\nBEGIN\n  SELECT AVG(salary) INTO p_sal_mediu FROM employees;\nEND;\n/\nWhich of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "generates error because is missing command RETURN"
+      },
+      {
+        "isCorrect": false,
+        "text": "generates error because command SELECT are structure incorectă"
+      },
+      {
+        "isCorrect": true,
+        "text": "se creates un subprogram"
+      },
+      {
+        "isCorrect": true,
+        "text": "within comenzilor din corpul procedurii se uses o funcție de grup"
+      },
+      {
+        "isCorrect": true,
+        "text": "procedure primește un parameter de ieandre"
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "question": "Given the PL/SQL block below. The tables exist, have the referenced columns, and at least 10 rows each. Some departments have employees, others do not.\n\nDECLARE\n  cursor c is SELECT DENUMIRE_DEP, COUNT(ID_ANGAJAT) NR_ANG\n  FROM EMPLOYEES A RIGHT JOIN DEPARTAMENTE D ON A.ID_DEPARTAMENT=D.ID_DEPARTAMENT\n  GROUP BY DENUMIRE_DEP\n  ORDER BY COUNT(ID_ANGAJAT) DESC;\n  r c%rowtype;\nBEGIN\n  open c;\n  DBMS_OUTPUT.PUT_LINE('Number of elements '||c%rowcount);\n  LOOP\n    fetch c into r;\n    exit when c%notfound;\n    IF r.NR_ANG=1 THEN\n      DBMS_OUTPUT.PUT_LINE(r.DENUMIRE_DEP||' HAS ONE EMPLOYEE');\n    ELSIF r.NR_ANG=0 THEN\n      DBMS_OUTPUT.PUT_LINE(r.DENUMIRE_DEP||' HAS NO EMPLOYEES');\n    ELSE\n      DBMS_OUTPUT.PUT_LINE(r.DENUMIRE_DEP||' ARE '|| r.NR_ANG||' EMPLOYEES');\n    END IF;\n  END LOOP;\n  DBMS_OUTPUT.PUT_LINE('Number of elements '||c%rowcount);\n  close c;\n  open c;\n  fetch c into r;\n  fetch c into r;\n  DBMS_OUTPUT.PUT_LINE(r.DENUMIRE_DEP||' ARE '|| r.NR_ANG||' EMPLOYEES');\nEND;\n/\n\nCare din urmatoarele afirmatii are true?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "A) Blocul PLSQL contine o error and does not will compila"
+      },
+      {
+        "isCorrect": false,
+        "text": "C) + D) Instructiunea de la row 10 will display always \"Number of elements 0\" and the statement de la row 26 poate declansa exceptia NO_DATA_FOUND"
+      },
+      {
+        "isCorrect": false,
+        "text": "E) Instructiunea de la row 27 poate declansa exceptia NO_DATA_FOUND"
+      },
+      {
+        "isCorrect": true,
+        "text": "C) Instructiunea de la row 10 will display always \"Number of elements 0\""
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "question": "In Oracle PL/SQL, to run the statement that drops a table, we use",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "CALL"
+      },
+      {
+        "isCorrect": false,
+        "text": "ALTER"
+      },
+      {
+        "isCorrect": true,
+        "text": "EXECUTE IMMEDIATE"
+      },
+      {
+        "isCorrect": false,
+        "text": "DROP"
+      },
+      {
+        "isCorrect": false,
+        "text": "DELETE"
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "question": "DECLARE\n  nume_complet VARCHAR2(300);\nBEGIN\n  SELECT nume||' '||prenume as nume_complet FROM Angajati\n  WHERE id_angajat=101;\n  DBMS_OUTPUT.PUT_LINE(nume_complet);\nEND;\n/\n\nWhich statement is correct?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "blocul uses un operator de grup"
+      },
+      {
+        "isCorrect": false,
+        "text": "blocul will display numele complet al angajatului cu id_angajat = 101 (if exista)"
+      },
+      {
+        "isCorrect": true,
+        "text": "blocul contine o error and not will rula"
+      },
+      {
+        "isCorrect": false,
+        "text": "blocul will display the value NULL"
+      },
+      {
+        "isCorrect": false,
+        "text": "blocul uses an explicit cursor"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "question": "What does an implicit cursor represent in PL/SQL?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "Este un cursor creat and gestionat automat de Oracle Database ori de cate ori se executes o statement LMD."
+      },
+      {
+        "isCorrect": false,
+        "text": "Este un cursor utilizat doar in proceduri stocate and functions."
+      },
+      {
+        "isCorrect": false,
+        "text": "Este un cursor creat de utilizator for gestionarea selectarilor complexe care returneaza mai multe rows."
+      },
+      {
+        "isCorrect": false,
+        "text": "Este un cursor care poate fi used for a itera through rezultatele unei interogari SQL."
+      },
+      {
+        "isCorrect": false,
+        "text": "Este un cursor care not necesita deschiderea explicita, dar necesita o inchidere explicita."
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "question": "Which operators are used in PL/SQL conditional expressions?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "^, *, /"
+      },
+      {
+        "isCorrect": false,
+        "text": "ADD, SUB, MULT"
+      },
+      {
+        "isCorrect": true,
+        "text": "AND, OR, NOT"
+      },
+      {
+        "isCorrect": false,
+        "text": ">, <, ="
+      },
+      {
+        "isCorrect": false,
+        "text": "&&, [], !"
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "question": "Given the block below. The table exists, has the referenced columns, and at least 10 rows.\n\nset serveroutput on\ndeclare\n  a number(7);\n  b number(7);\n  T BOOLEAN DEFAULT FALSE;\nbegin\n  IF not T THEN\n    (a,b):=select sum(SALARIUL),max(SALARIUL) from EMPLOYEES;\n    dbms_output.put_line('a='||a);\n    dbms_output.put_line('b='||b);\n  ELSE\n    dbms_output.put_line('Something else');\n  END IF;\nend;\n/\n\nWhat will be the result of running the block?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Se displays the values lui a and b"
+      },
+      {
+        "isCorrect": true,
+        "text": "The block does not compile"
+      },
+      {
+        "isCorrect": false,
+        "text": "Se displays Something else"
+      },
+      {
+        "isCorrect": false,
+        "text": "The block uses a repetitive structure"
+      },
+      {
+        "isCorrect": false,
+        "text": "The block runs and an exception is raised"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "question": "Consider the following PL/SQL block:\nSET SERVEROUTPUT ON\nDECLARE\nCURSOR cursor1 IS SELECT id_angajat, nume FROM Angajati;\nvid employees.id_angajat%TYPE;\nvnume CHAR (20);\nBEGIN\nOPEN cursor1;\nWHILE cursor1% FOUND LOOP\nFETCH cursor1 INTO vid,vnume;\nDBMS_OUTPUT.PUT_LINE('Angajatul '||vnume);\nEND LOOP;\nEND;\n/\nWhich of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "blocul PL/SQL is erroneous"
+      },
+      {
+        "isCorrect": true,
+        "text": "works with an explicit cursor"
+      },
+      {
+        "isCorrect": true,
+        "text": "the block is correct, but displays nothing"
+      },
+      {
+        "isCorrect": true,
+        "text": "sequentially traverses an internal memory area"
+      },
+      {
+        "isCorrect": false,
+        "text": "works with an implicit cursor"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "question": "The following PL/SQL sequence is given:\ncreate or replace package p_angajati\nis\nv_total number;\nfunction CAUT_ANGAJAT(p_id_angajat employees.id_angajat%type) return employees.nume%type;\nfunction CAUT_ANGAJAT(p_nume employees.nume%type, p_id_dep departments.id_departament%type)\nreturn employees.salary%type;\nend;\n/\nWhich of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "the functions in the package are overloaded"
+      },
+      {
+        "isCorrect": false,
+        "text": "the package does not compile successfully because the CAUT_ANGAJAT functions have the same name"
+      },
+      {
+        "isCorrect": false,
+        "text": "the package does not compile successfully because the BODY keyword is missing"
+      },
+      {
+        "isCorrect": true,
+        "text": "the variable v_total is public and can be accessed as follows: p_angajati.v_total"
+      },
+      {
+        "isCorrect": false,
+        "text": "overloading is not allowed in this context"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "question": "The following command sequence is given:\ncreate or replace FUNCTION f_emp_vechime\n(p_data_angajare IN employees.data_angajare%type)\nreturn number\nis\nbegin\nreturn to_number(round((sysdate-p_data_angajare)/365,0));\nend f_emp_vechime;\n/\nSELECT id_angajat, nume, prenume, f_emp_vechime(data_angajare)\nFROM employees\nWHERE f_emp_vechime(data_angajare)>10;\n/\nWhich of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "the function returns the number of days between the current date and the date received as a parameter"
+      },
+      {
+        "isCorrect": true,
+        "text": "the function returns the number of years between the current date and the date received as a parameter"
+      },
+      {
+        "isCorrect": false,
+        "text": "an error will be generated because the function cannot be used in the SELECT command"
+      },
+      {
+        "isCorrect": false,
+        "text": "the SELECT statement displays the seniority in days of employees with seniority greater than 10 days"
+      },
+      {
+        "isCorrect": true,
+        "text": "the SELECT statement displays the seniority in years of employees with seniority greater than 10 years"
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "question": "Care din următoarele functions or statements cannot be usede direct within unei statements PL/SQL de assignment:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "SUBSTR"
+      },
+      {
+        "isCorrect": true,
+        "text": "MAX"
+      },
+      {
+        "isCorrect": true,
+        "text": "DECODE"
+      },
+      {
+        "isCorrect": false,
+        "text": "NVL"
+      },
+      {
+        "isCorrect": true,
+        "text": "MIN"
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "question": "Consider the following PL/SQL block:\nSET SERVEROUTPUT ON\nDECLARE\np clients%ROWTYPE;\nCURSOR c IS SELECT * FROM clients WHERE limita_credit > 1000\nORDER BY limita_credit DESC;\nBEGIN\nFOR p IN c LOOP\nDBMS_OUTPUT.PUT_LINE('clientul '||p. nume_client ||' are limit de credit: '||p. limita_credit);\nEXIT WHEN p%ROWCOUNT>=5;\nEND LOOP;\nEND;\n/\nWhich of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "blocul will display o error because does not poate ieand cu EXIT din a FOR loop"
+      },
+      {
+        "isCorrect": false,
+        "text": "blocul displays un top al primilor 5 clients cu limit de credit cea greater than"
+      },
+      {
+        "isCorrect": true,
+        "text": "blocul does not will executes because does not uses corect variable p"
+      },
+      {
+        "isCorrect": true,
+        "text": "blocul uses an explicit cursor through care se parcurg clienții cu limit de credit greater than de 1000"
+      },
+      {
+        "isCorrect": true,
+        "text": "blocul uses o variabilă de tip record"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "question": "Consider the following PL/SQL block:\nSET SERVEROUTPUT ON\nDECLARE\nCURSOR cursor1 IS SELECT id_angajat, nume FROM Angajati ORDER BY salary DESC;\nvid employees.id_angajat%TYPE;\nvnume CHAR (20);\nBEGIN\nOPEN cursor1;\nFETCH cursor1 INTO vid,vnume;\nDBMS_OUTPUT.PUT_LINE('Angajatul '||vnume);\nCLOSE cursor1;\nEND;\n/\nWhich of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "se declares două variabile scalare"
+      },
+      {
+        "isCorrect": false,
+        "text": "blocul PL/SQL is erroneous because is missing structure repetitive"
+      },
+      {
+        "isCorrect": true,
+        "text": "se displays numele angajatului cu cel greater than salary"
+      },
+      {
+        "isCorrect": false,
+        "text": "works with an implicit cursor"
+      },
+      {
+        "isCorrect": true,
+        "text": "works with an explicit cursor"
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "question": "Consider the following PL/SQL block:\nSET SERVEROUTPUT ON\nDECLARE\nprocent NUMBER(2);\nBEGIN\nprocent:=15;\nUPDATE Angajati\nSET salary=salary*procent/100\nWHERE id_angajat=120;\nROLLBACK;\nEXCEPTION\nWHEN OTHERS THEN\nDBMS_OUTPUT.PUT_LINE(SQLERRM);\nEND;\n/\nWhich of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "command ROLLBACK not is permisă in a bloc PL/SQL"
+      },
+      {
+        "isCorrect": true,
+        "text": "blocul realizează o operație de actualizare"
+      },
+      {
+        "isCorrect": true,
+        "text": "command UPDATE is permisă in a bloc PL/SQL"
+      },
+      {
+        "isCorrect": false,
+        "text": "is displayed the value unui atribut al cursorului implicit"
+      },
+      {
+        "isCorrect": false,
+        "text": "may occur excepția no_data_found în cazul în care not is găsit angajatul cu id-ul 120"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "question": "Among the advantages of a DBMS are:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "the existence of optimization mechanisms in the procedural language"
+      },
+      {
+        "isCorrect": true,
+        "text": "implementation of relational operators in data retrieval"
+      },
+      {
+        "isCorrect": false,
+        "text": "data dependence on the physical storage medium"
+      },
+      {
+        "isCorrect": false,
+        "text": "data normalization"
+      },
+      {
+        "isCorrect": true,
+        "text": "mechanisms for optimizing data access"
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "question": "Consider the following PL/SQL block:\ncreate or replace FUNCTION afiseaza_salariul (v_id id_angajat.employees%type)\nRETURN number\nDECLARE\nv_sal number(8,2);\nBEGIN\nselect salary into v_sal from employees where id_angajat=v_id;\nEXCEPTION\nWHEN no_data_found THEN return -1;\nWHEN too_many_rows THEN return -2;\nWHEN others THEN return 0;\nEND;\n/\nWhich of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "blocul defines incorect o variabilă locală"
+      },
+      {
+        "isCorrect": false,
+        "text": "function generates error because excepțiile not are tratate corespunzător"
+      },
+      {
+        "isCorrect": true,
+        "text": "function generates error because not returnează the value salariului"
+      },
+      {
+        "isCorrect": false,
+        "text": "function generates error because parametrul is incorect specificat"
+      },
+      {
+        "isCorrect": true,
+        "text": "blocul creates un subprogram"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "question": "Specify which of the following statements are true:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "SGBD are ca obiectiv asigurarea performanțelor globale ale aplicației and partajabilitatea resurselor de calcul"
+      },
+      {
+        "isCorrect": false,
+        "text": "functions de database ale unui SGBD are: asigurarea redundanței minime and controlul, data manipulation, partajabilitatea datelor, optimizare"
+      },
+      {
+        "isCorrect": false,
+        "text": "arhitectura pe componente a unui SGBD is compusă din: kernel, database de data and tools"
+      },
+      {
+        "isCorrect": true,
+        "text": "unul dintre obiectivele SGBD is de a asigura independența logică and fizică a datelor"
+      },
+      {
+        "isCorrect": true,
+        "text": "SGBD is un ansamblu de elemente intercondiționate care contribuie la realizarea and exploatarea unei applications cu baze de data"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "question": "Consider the following PL/SQL block:\nDECLARE\ndata varchar2(25);\nv number(2);\nBEGIN\nselect sysdate-30 into data from dual\nwhere 1=2;\nDBMS_OUTPUT.PUT_LINE(data);\nEXCEPTION\nWHEN NO_DATA_FOUND THEN\nDBMS_OUTPUT.PUT_LINE(v);\nEND;\n/\nWhich of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "apare o error becauwillriable data is de tip VARCHAR"
+      },
+      {
+        "isCorrect": false,
+        "text": "se displays un number de zile"
+      },
+      {
+        "isCorrect": true,
+        "text": "apare o excepție tratată corespunzător"
+      },
+      {
+        "isCorrect": true,
+        "text": "blocul se executes successfully, dar not displays nimic"
+      },
+      {
+        "isCorrect": false,
+        "text": "se displays o dată calendaristică"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "question": "The attributes of an explicit cursor are:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "ISOPEN, NOTFOUND, ROWCOUNT"
+      },
+      {
+        "isCorrect": false,
+        "text": "FETCH, CLOSE, OPEN"
+      },
+      {
+        "isCorrect": false,
+        "text": "ISCLOSE, FOUND, ROWCOUNT"
+      },
+      {
+        "isCorrect": false,
+        "text": "ROWNUM, NOTFOUND, FOUND"
+      },
+      {
+        "isCorrect": false,
+        "text": "ROWCOUNT, NO_DATA_FOUND, ISOPEN"
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "question": "A relational DBMS ensures data integrity through:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "automatic data recovery procedures in case of incidents"
+      },
+      {
+        "isCorrect": true,
+        "text": "transaction management mechanisms"
+      },
+      {
+        "isCorrect": false,
+        "text": "encryption procedures"
+      },
+      {
+        "isCorrect": false,
+        "text": "special data access procedures"
+      },
+      {
+        "isCorrect": false,
+        "text": "use of virtual tables"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "question": "Se consideră trigger-ul t_verif_stoc:\ncreate or replace trigger t_verif_stoc\nbefore insert on rand_comenzi\nfor each row\ndeclare\nv_stoc stocuri.stoc%type;\nbegin\nselect stoc into v_stoc from stocuri where id_produs=:new.id_produs;\nif :new.cantitate > v_stoc then\n:new.cantitate:=v_stoc;\nend if;\nupdate stocuri\nset stoc=stoc-:new.cantitate\nwhere id_produs=:new.id_produs;\nend;\n/\ninsert into rand_comenzi values(2392, 3110, 7, 20);\nrollback;\n\nSpecify which of the following statements are true:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "declanșatorul will modifica în funcție de stocul disponibil cantitatea comandată"
+      },
+      {
+        "isCorrect": true,
+        "text": "the statement ROLLBACK anulează operația de INSERT and pe cea de actualizare dwithin declanșatorului"
+      },
+      {
+        "isCorrect": false,
+        "text": "the statement ROLLBACK will anula doar operația de INSERT"
+      },
+      {
+        "isCorrect": false,
+        "text": "operația de actualizare not is permisă within declanșatorului"
+      },
+      {
+        "isCorrect": false,
+        "text": "within declanșatorului must tratată excepția no_data_found care may occur la the statement SELECT"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "question": "Among the roles of a DBMS are:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "asigurarea securității bazei de data"
+      },
+      {
+        "isCorrect": true,
+        "text": "data manipulation"
+      },
+      {
+        "isCorrect": false,
+        "text": "optimizarea spațiului and a resurselor de calcul"
+      },
+      {
+        "isCorrect": false,
+        "text": "gestiunea resurselor sistemului informatic"
+      },
+      {
+        "isCorrect": true,
+        "text": "defining the database structure conform unui model de data"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "question": "Se consideră table Angajați and următoarele secvențe:\nCREATE OR REPLACE TRIGGER t_angajati\nBEFORE update or DELETE ON Angajati\nFOR EACH ROW\nwhen (new.salary<1000)\nBEGIN\nRAISE_APPLICATION_ERROR (-20100,'Operatie interzisa!');\nEND;\n/\ndelete from employees where id_angajat=120;\n\nPrecizați care dintre următoarele afirmații is adevărată:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "apare o error becauwillriable new not is adresată corespunzător"
+      },
+      {
+        "isCorrect": false,
+        "text": "la operația de ștergere will apărea excepția -20100 ca urmare a executării declanșatorului"
+      },
+      {
+        "isCorrect": true,
+        "text": "declanșatorul se compiles successfully"
+      },
+      {
+        "isCorrect": true,
+        "text": "operația de ștergere will realiza successfully because declanșatorul does not executes niciodată în acest caz"
+      },
+      {
+        "isCorrect": true,
+        "text": "declanșatorul se executes for fiecare înregistrare din table Angajați"
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "question": "Se consideră secvența de commands:\ncreate or replace TRIGGER t_salaril\nAFTER UPDATE OF id_functie ON employees FOR EACH ROW\nDECLARE\nBEGIN\nINSERT INTO istoric_functions VALUES\n( :old.id_angajat, :old.data_angajare, SYSDATE, :old.id_functie, :old.id_departament);\nCOMMIT;\nEND;\n/\nUPDATE Angajati\nSET id_functie='IT_DEV'\nWHERE id_departament=50;\n\nPresupunând că în table Angajati, în departamentul 50 lucrează 20 de employees, precizați care dintre afirmații is adevărată:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "declanșatorul is creat cu errors de compilare"
+      },
+      {
+        "isCorrect": false,
+        "text": "the statement COMMIT din declanșator will finaliza ambele commands de manipulation (INSERT and UPDATE)"
+      },
+      {
+        "isCorrect": true,
+        "text": "declanșatorul is compilat successfully însă will apărea o error la execuția operației DML"
+      },
+      {
+        "isCorrect": true,
+        "text": "the statement COMMIT not is permisă în declanșator în this context"
+      },
+      {
+        "isCorrect": false,
+        "text": "the statement INSERT din declanșator se finalizează independent de tranzacția throughcipală"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "question": "Consider the following command sequence:\ndeclare\ni number;\nbegin\ni := 7;\nWHILE i < 15 LOOP\ni := i+3;\nDBMS_OUTPUT.PUT_LINE('The value of counter i is: ' || i);\nEND LOOP;\nend;\n/\nWhich of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "secvența will display 10, 13, 16"
+      },
+      {
+        "isCorrect": false,
+        "text": "blocul will executes la infinit"
+      },
+      {
+        "isCorrect": false,
+        "text": "blocul does not will executes because not putem folosi dbms_output.put_line within unei bucle"
+      },
+      {
+        "isCorrect": false,
+        "text": "secvența will display 7, 10, 13"
+      },
+      {
+        "isCorrect": false,
+        "text": "is missing operația de incrementare a contorului"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "question": "Consider the following PL/SQL block:\nDECLARE\nn CONSTANT VARCHAR2(5):=2;\na BOOLEAN DEFAULT false;\nBEGIN\nIF n BETWEEN -1 AND 1 OR a THEN DBMS_OUTPUT.PUT_LINE('A');\nELSIF n IS NOT NULL AND NOT a THEN DBMS_OUTPUT.PUT_LINE('B');\nELSE\nDBMS_OUTPUT.PUT_LINE('C');\nEND IF;\nEND;\n/\nBlocul PL/SQL displays:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "C"
+      },
+      {
+        "isCorrect": false,
+        "text": "A"
+      },
+      {
+        "isCorrect": false,
+        "text": "un mesaj de error because does not uses corect constanta"
+      },
+      {
+        "isCorrect": true,
+        "text": "B"
+      },
+      {
+        "isCorrect": false,
+        "text": "un mesaj de error because does not defines corect variable booleană"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "question": "Pentru excepțiile definite de utilizator is obligatoriu:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "să fie tratate în section executable"
+      },
+      {
+        "isCorrect": false,
+        "text": "să li se atribuie un cod de error"
+      },
+      {
+        "isCorrect": true,
+        "text": "they must be declared"
+      },
+      {
+        "isCorrect": false,
+        "text": "să fie propagate către mediul callant"
+      },
+      {
+        "isCorrect": true,
+        "text": "they must be invoked by the user"
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "question": "What will be the effect of the following block if no row exists for employee_id = 1000?\nSET SERVEROUTPUT ON\nBEGIN\n  UPDATE employees\n     SET salary = salary + 100\n   WHERE employee_id = 1000;\n  DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT);\nEND;",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Displays nothing and continues execution without errors."
+      },
+      {
+        "isCorrect": false,
+        "text": "Displays NULL because no rows are affected."
+      },
+      {
+        "isCorrect": true,
+        "text": "Displays 0 and the block ends normally."
+      },
+      {
+        "isCorrect": false,
+        "text": "Raises the predefined NO_DATA_FOUND exception."
+      },
+      {
+        "isCorrect": false,
+        "text": "Raises the TOO_MANY_ROWS exception."
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "question": "Which combination is valid regarding the existence of specification and/or body?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Package with body but without specification - only for private local procedures."
+      },
+      {
+        "isCorrect": false,
+        "text": "If the specification is missing, the body automatically becomes public."
+      },
+      {
+        "isCorrect": true,
+        "text": "If the specification is missing, the body will not compile."
+      },
+      {
+        "isCorrect": false,
+        "text": "Package with only specification (no body) - possible when no implementation is needed; package with only body - allowed, but objects remain private."
+      },
+      {
+        "isCorrect": false,
+        "text": "Both parts are always mandatory."
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "question": "Consider the PL/SQL block:\nSET SERVEROUTPUT ON\nDECLARE\n  CURSOR c IS SELECT department_id FROM departments;\n  v_id departments.department_id%TYPE;\nBEGIN\n  OPEN c;\n  DBMS_OUTPUT.PUT_LINE(c%ROWCOUNT);\n  FETCH c INTO v_id;\n  CLOSE c;\nEND;\nThe table exists and has rows. What will the block display?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "1"
+      },
+      {
+        "isCorrect": false,
+        "text": "NULL"
+      },
+      {
+        "isCorrect": true,
+        "text": "0"
+      },
+      {
+        "isCorrect": false,
+        "text": "Raises INVALID_CURSOR exception"
+      },
+      {
+        "isCorrect": false,
+        "text": "2"
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "question": "Select the true statement about a VARRAY:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "It is always a sparse collection."
+      },
+      {
+        "isCorrect": true,
+        "text": "It can contain a variable number of elements, but does not exceed a maximum size fixed at definition."
+      },
+      {
+        "isCorrect": false,
+        "text": "DELETE[n] can remove a single element"
+      },
+      {
+        "isCorrect": false,
+        "text": "The index can have negative values."
+      },
+      {
+        "isCorrect": false,
+        "text": "It cannot be passed as a parameter to a subprogram."
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "question": "Using the FORALL clause instead of a classic FOR loop is recommended for:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Improving code readability."
+      },
+      {
+        "isCorrect": false,
+        "text": "Enabling asynchronous commit."
+      },
+      {
+        "isCorrect": false,
+        "text": "Explicit support for VARRAY type collections."
+      },
+      {
+        "isCorrect": true,
+        "text": "Reducing the number of context switches between the PL/SQL engine and the SQL engine."
+      },
+      {
+        "isCorrect": false,
+        "text": "Allowing the use of GOTO inside DML statements."
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "question": "A trigger that does not contain the FOR EACH ROW clause executes:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "Once for the DML statement, regardless of the number of affected rows."
+      },
+      {
+        "isCorrect": false,
+        "text": "Only if the statement affects at least one row."
+      },
+      {
+        "isCorrect": false,
+        "text": "Twice (before and after) for each row."
+      },
+      {
+        "isCorrect": false,
+        "text": "Only on COMMIT command."
+      },
+      {
+        "isCorrect": false,
+        "text": "Once for each modified row."
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "question": "A \"context switch\" occurs when:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "The DBMS_OUTPUT.PUT_LINE procedure is called"
+      },
+      {
+        "isCorrect": false,
+        "text": "The TRIM method is used on a collection"
+      },
+      {
+        "isCorrect": false,
+        "text": "Entering an IF ... THEN branch"
+      },
+      {
+        "isCorrect": false,
+        "text": "An unexpected exception is raised"
+      },
+      {
+        "isCorrect": true,
+        "text": "The PL/SQL engine executes an SQL statement and transfers it to the SQL engine"
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "question": "The FIRST and LAST methods on a collection return:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "The maximum declared size."
+      },
+      {
+        "isCorrect": false,
+        "text": "The values of the first and last elements."
+      },
+      {
+        "isCorrect": false,
+        "text": "The total number of elements."
+      },
+      {
+        "isCorrect": false,
+        "text": "A boolean value indicating whether the list is empty."
+      },
+      {
+        "isCorrect": true,
+        "text": "The first and last defined index in the collection."
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "question": "What will the following block display if no rows exist with DEPARTMENT_ID = 999?\nSET SERVEROUTPUT ON\nBEGIN\n  DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT);\n  UPDATE employees\n    SET salary = salary + 100\n    WHERE department_id = 999;\nEND;",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "0"
+      },
+      {
+        "isCorrect": false,
+        "text": "1"
+      },
+      {
+        "isCorrect": true,
+        "text": "NULL"
+      },
+      {
+        "isCorrect": false,
+        "text": "TRUE"
+      },
+      {
+        "isCorrect": false,
+        "text": "raises NO_DATA_FOUND exception"
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "question": "Which combination is valid regarding the existence of the specification and/or body?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Pachet cu numai specificație (fără corp) – posibil când not e nevoie de implementare; pachet cu numai corp – permis, dar obiectele rămân private."
+      },
+      {
+        "isCorrect": false,
+        "text": "Pachet cu corp dar fără specificație – doar for proceduri locale private."
+      },
+      {
+        "isCorrect": true,
+        "text": "Dacă lipsesc specificațiile, corpul does not compiles."
+      },
+      {
+        "isCorrect": false,
+        "text": "Dacă lipsesște specificația, corpul devine automat public."
+      },
+      {
+        "isCorrect": false,
+        "text": "Ambele părți are întotdeauna obligatorii."
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "question": "A context switch occurs when:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "Motorul PL/SQL executes o statement SQL and o transferă motorului SQL"
+      },
+      {
+        "isCorrect": false,
+        "text": "Se callează procedure DBMS_OUTPUT.PUT_LINE"
+      },
+      {
+        "isCorrect": false,
+        "text": "Se raises o excepție neprevăzută"
+      },
+      {
+        "isCorrect": false,
+        "text": "Se uses metoda TRIM asupra unei colecții"
+      },
+      {
+        "isCorrect": false,
+        "text": "Se intră in a ramură IF ... THEN"
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "question": "Using the FORALL clause instead of a classic FOR loop is recommended for:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Creșterea lizibilității codului."
+      },
+      {
+        "isCorrect": false,
+        "text": "Suport explicit for colecțiile de tip VARRAY."
+      },
+      {
+        "isCorrect": false,
+        "text": "Activarea commit-ului asincron."
+      },
+      {
+        "isCorrect": false,
+        "text": "Permisiunea de a folosi GOTO în interiorul instrucțiunilor DML."
+      },
+      {
+        "isCorrect": true,
+        "text": "Reducerea numărului de context-switch-uri dintre motorul PL/SQL and motorul SQL."
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "question": "A trigger that does not contain the FOR EACH ROW clause executes:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "De două ori (înainte and după) for fiecare row."
+      },
+      {
+        "isCorrect": false,
+        "text": "Doar if the statement afectează cel puțin un row."
+      },
+      {
+        "isCorrect": false,
+        "text": "Numai la command COMMIT."
+      },
+      {
+        "isCorrect": true,
+        "text": "O singură dată for the statement DML, indiferent de the number de rows afectate."
+      },
+      {
+        "isCorrect": false,
+        "text": "O dată for fiecare row modificat."
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "question": "Global variables declared in a package specification:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "Persistă pe durata sesiunii curente and pot memora stare între callurile oricărui subprogram din pachet."
+      },
+      {
+        "isCorrect": false,
+        "text": "Sunt create la log-on and distruse la commit."
+      },
+      {
+        "isCorrect": false,
+        "text": "Nu can be inițializate în declaresție."
+      },
+      {
+        "isCorrect": false,
+        "text": "Sunt vizibile doar în corpul pachetului."
+      },
+      {
+        "isCorrect": false,
+        "text": "Persistă for toate sesiunile simultan."
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "question": "Inside a trigger, the IF INSERTING THEN ... test is available:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Numai în statement-triggers BEFORE."
+      },
+      {
+        "isCorrect": false,
+        "text": "Numai în compound triggers."
+      },
+      {
+        "isCorrect": false,
+        "text": "Doar în triggers AFTER."
+      },
+      {
+        "isCorrect": false,
+        "text": "În orice bloc PL/SQL."
+      },
+      {
+        "isCorrect": true,
+        "text": "În orice trigger (row or statement) for a distinge evenimentul DML care l-a declanșat."
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "question": "Do you want the default point?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "DA"
+      },
+      {
+        "isCorrect": false,
+        "text": "NU"
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "question": "What will the following PL/SQL block display? DECLARE CURSOR c IS SELECT id_departament FROM departments; v_id departments.id_departament%TYPE; BEGIN OPEN c; FETCH c INTO v_id; CLOSE c; DBMS_OUTPUT.PUT_LINE(c%ROWCOUNT); END;",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "NULL"
+      },
+      {
+        "isCorrect": true,
+        "text": "Declanșează excepția INVALID_CURSOR"
+      },
+      {
+        "isCorrect": false,
+        "text": "0"
+      },
+      {
+        "isCorrect": false,
+        "text": "2"
+      },
+      {
+        "isCorrect": false,
+        "text": "1"
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "question": "Which PL/SQL loop automatically handles the OPEN, FETCH, and CLOSE operations for an explicit cursor?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "FOR r IN c LOOP ... END LOOP"
+      },
+      {
+        "isCorrect": false,
+        "text": "LOOP ... EXIT WHEN ... END LOOP"
+      },
+      {
+        "isCorrect": false,
+        "text": "GOTO c%ROWCOUNT"
+      },
+      {
+        "isCorrect": false,
+        "text": "WHILE ... LOOP ... END LOOP"
+      },
+      {
+        "isCorrect": false,
+        "text": "FOR i IN 1..SQL%ROWCOUNT LOOP ... END LOOP"
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "question": "The following command sequence is given: SET SERVEROUTPUT ON; BEGIN; UPDATE COMENZI_PRODUSE SET datac=datac-1 where sysdate!=sysdate; DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT); ROLLBACK; EXCEPTION WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Eroare'); END; Assume that the table COMENZI_PRODUSE exists and has 105 rows. Under these conditions, the PL/SQL block displays:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "O value între 1 and 105"
+      },
+      {
+        "isCorrect": false,
+        "text": "Eroare"
+      },
+      {
+        "isCorrect": true,
+        "text": "0"
+      },
+      {
+        "isCorrect": false,
+        "text": "NULL"
+      },
+      {
+        "isCorrect": false,
+        "text": "105"
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "question": "What does an implicit cursor represent in PL/SQL?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "Este un cursor creat and gestionat automat de Oracle Database ori de câte ori se executes o statement LMD."
+      },
+      {
+        "isCorrect": false,
+        "text": "Este un cursor care poate fi used for a itera through rezultatele unei interogări SQL."
+      },
+      {
+        "isCorrect": false,
+        "text": "Este un cursor care not necesită deschiderea explicită, dar necesită o închidere explicită."
+      },
+      {
+        "isCorrect": false,
+        "text": "Este un cursor creat de utilizator for gestionarea selectrilor complexe care returnează mai multe rows."
+      },
+      {
+        "isCorrect": false,
+        "text": "Este un cursor utilizat doar în proceduri stocate and functions."
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "question": "Given the block below. The table exists, has the referenced columns, and at least 10 rows. DECLARE V_NUME VARCHAR2(100); V_PRENUME EMPLOYEES.PRENUME%TYPE; I NUMBER(3) DEFAULT 100; BEGIN I:=1000; SELECT NUME,PRENUME INTO V_NUME,V_PRENUME FROM EMPLOYEES WHERE ID_ANGAJAT=I; DBMS_OUTPUT.PUT_LINE('Angajatul '||I||' is '||V_NUME||' '||V_PRENUME); I:=I+1; EXCEPTION WHEN NO_DATA_FOUND THEN DBMS_OUTPUT.PUT_LINE('EMPLOYEE DOES NOT EXIST '||I); WHEN TOO_MANY_ROWS THEN DBMS_OUTPUT.PUT_LINE('THE SELECT RETURNED MORE THAN 1 ROW'); WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('ANOTHER EXCEPTION OCCURRED'); BEGIN I:=I/0; EXCEPTION WHEN ZERO_DIVIDE THEN DBMS_OUTPUT.PUT_LINE('WE CANNOT DIVIDE BY ZERO'); END; END;",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "EMPLOYEE DOES NOT EXIST 1000"
+      },
+      {
+        "isCorrect": false,
+        "text": "Depends on the data existing in the ANGAJATI table"
+      },
+      {
+        "isCorrect": true,
+        "text": "ANOTHER EXCEPTION OCCURRED / WE CANNOT DIVIDE BY ZERO"
+      },
+      {
+        "isCorrect": false,
+        "text": "The block runs but displays nothing"
+      },
+      {
+        "isCorrect": false,
+        "text": "The block does not compile"
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "question": "What will the following PL/SQL block display? DECLARE CURSOR c IS SELECT id_departament FROM departments; v_id departments.id_departament%TYPE; BEGIN OPEN c; FETCH c INTO v_id; CLOSE c; DBMS_OUTPUT.PUT_LINE(c%ROWCOUNT); END; Tabela departments exista and e populata.",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "NULL"
+      },
+      {
+        "isCorrect": true,
+        "text": "Declanseaza exceptia INVALID_CURSOR"
+      },
+      {
+        "isCorrect": false,
+        "text": "0"
+      },
+      {
+        "isCorrect": false,
+        "text": "2"
+      },
+      {
+        "isCorrect": false,
+        "text": "1"
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "question": "Given the trigger below. The tables exist, have the referenced columns, and at least 10 rows each. CREATE OR REPLACE TRIGGER CHECK_SAL_REP AFTER UPDATE OF SALARIUL ON EMPLOYEES FOR EACH ROW WHEN (NEW.SALARIUL>OLD.SALARIUL AND NEW.ID_FUNCTIE='SA_REP') DECLARE N NUMBER; BEGIN SELECT COUNT(*) INTO N FROM COMENZI WHERE ID_ANGAJAT=:OLD.ID_ANGAJAT; IF N=0 THEN :NEW.SALARIUL:=:OLD.SALARIUL; END IF; END; Which of the following statements is true?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "Triggerul does not compiles successfully"
+      },
+      {
+        "isCorrect": false,
+        "text": "Triggerul se raises o singura data, indiferent cate rows are modificate"
+      },
+      {
+        "isCorrect": false,
+        "text": "Triggerul se compiles dar raises always o exceptie"
+      },
+      {
+        "isCorrect": false,
+        "text": "Acest tip de trigger must sa contina commit or rollback in partea executable"
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "question": "Fie urmatorul bloc PL/SQL: set serveroutput on / declare v_nota pls_integer:=3; / begin / case / when v_nota between 5 and 10 then dbms_output.put_line('Promovat'); dbms_output.put_line('Felicitari'); / when v_nota is null then dbms_output.put_line('Missing grade'); / when v_nota<1 or v_nota>10 then dbms_output.put_line('Invalid grade'); / end case; / dbms_output.put_line('Failed'); / end; What happens when it runs?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "The block does not compile"
+      },
+      {
+        "isCorrect": false,
+        "text": "Blocul runs successfully dar not displays nimic"
+      },
+      {
+        "isCorrect": true,
+        "text": "In urma rularii se raises o exceptie"
+      },
+      {
+        "isCorrect": false,
+        "text": "In urma rularii se displays Failed"
+      },
+      {
+        "isCorrect": false,
+        "text": "The block uses an implicit cursor"
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "question": "Do you want the default point? I declare that I have not sent my solution to colleagues. In case of identical solutions, the students involved will not pass the exam.",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "DA"
+      },
+      {
+        "isCorrect": false,
+        "text": "NU"
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "question": "Which combination is valid regarding the existence of a PL/SQL package specification and/or body?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Pachet cu numai specificatie (fara corp) – posibil cand not e nevoie de implementare; pachet cu numai corp – permis, dar obiectele raman private."
+      },
+      {
+        "isCorrect": false,
+        "text": "Pachet cu corp dar fara specificatie – doar for proceduri locale private."
+      },
+      {
+        "isCorrect": true,
+        "text": "Daca lipsesc specificatiile, corpul does not compiles."
+      },
+      {
+        "isCorrect": false,
+        "text": "Daca is missing specificatia, corpul devine automat public."
+      },
+      {
+        "isCorrect": false,
+        "text": "Ambele parti are intotdeauna obligatorii."
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "question": "Given the PL/SQL block below. The tables exist, have the referenced columns, and at least 10 rows each. Some departments have employees, others do not. (Cursor cu RIGHT JOIN, GROUP BY, ORDER BY, LOOP cu IF/ELSIF/ELSE, apoi deschidere cursor din nou cu 2 fetch-uri). Care din urmatoarele afirmatii are true? A) Blocul PLSQL contine o error and does not will compila B) Blocul PLSQL will declansa always o exceptie C) Instructiunea de la row 10 will display always \"Number of elements 0\" D) Instructiunea de la row 26 poate declansa exceptia NO_DATA_FOUND E) Instructiunea de la row 27 poate declansa exceptia NO_DATA_FOUND",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "C) + D)"
+      },
+      {
+        "isCorrect": false,
+        "text": "A)"
+      },
+      {
+        "isCorrect": true,
+        "text": "C)"
+      },
+      {
+        "isCorrect": false,
+        "text": "B)"
+      },
+      {
+        "isCorrect": false,
+        "text": "D) + E)"
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "question": "Given the block below. The table exists, has the referenced columns, and at least 10 rows. SET SERVEROUTPUT ON / DECLARE V_NUME VARCHAR2(100); V_PRENUME EMPLOYEES.PRENUME%TYPE; I NUMBER(3) DEFAULT 100; BEGIN I:=1000; SELECT NUME,PRENUME INTO V_NUME,V_PRENUME FROM EMPLOYEES WHERE ID_ANGAJAT=I; DBMS_OUTPUT.PUT_LINE('Angajatul '||I||' is '||V_NUME||' '||V_PRENUME); I:=I+1; EXCEPTION WHEN NO_DATA_FOUND THEN DBMS_OUTPUT.PUT_LINE('EMPLOYEE DOES NOT EXIST '||I); WHEN TOO_MANY_ROWS THEN DBMS_OUTPUT.PUT_LINE('THE SELECT RETURNED MORE THAN 1 ROW'); WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('ANOTHER EXCEPTION OCCURRED'); BEGIN I:=I/0; EXCEPTION WHEN ZERO_DIVIDE THEN DBMS_OUTPUT.PUT_LINE('WE CANNOT DIVIDE BY ZERO'); END; END; What does it display?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "The block does not compile"
+      },
+      {
+        "isCorrect": false,
+        "text": "Depends on the data existing in the ANGAJATI table"
+      },
+      {
+        "isCorrect": false,
+        "text": "The block runs but displays nothing"
+      },
+      {
+        "isCorrect": false,
+        "text": "EMPLOYEE DOES NOT EXIST 1000"
+      },
+      {
+        "isCorrect": true,
+        "text": "ANOTHER EXCEPTION OCCURRED / WE CANNOT DIVIDE BY ZERO"
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "question": "The following command sequence is given: CREATE OR REPLACE PROCEDURE check_sysdate IS BEGIN dbms_output.put_line(SYSDATE+2/48); END; / set serveroutput on / BEGIN check_sysdate; END; Care afirmatie e cea corecta?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Se displays un sir vid"
+      },
+      {
+        "isCorrect": false,
+        "text": "The block does not compile"
+      },
+      {
+        "isCorrect": true,
+        "text": "Se displays o data calendaristica"
+      },
+      {
+        "isCorrect": false,
+        "text": "Se displays o value numerica"
+      },
+      {
+        "isCorrect": false,
+        "text": "The block runs but raises an exception"
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "question": "Ce reprezinta o exceptie definita de utilizator in PL/SQL?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "Este o exceptie ridicata de catre utilizator folosind the statement RAISE."
+      },
+      {
+        "isCorrect": false,
+        "text": "Este o exceptie care not poate fi capturata or gestionata in blocul PL/SQL."
+      },
+      {
+        "isCorrect": false,
+        "text": "Este o exceptie care apare atunci cand un utilizator incearca sa acceseze o procedure stocata care not exista."
+      },
+      {
+        "isCorrect": false,
+        "text": "Este o exceptie care apare doar atunci cand utilizatorul incearca sa se conecteze la database de data."
+      },
+      {
+        "isCorrect": false,
+        "text": "Este o exceptie definita de system care is capturata and gestionata de catre utilizator."
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "question": "Specify which of the following statements are true:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "SGBD is componenta software a unui system de database de data care interacționează cu toate celelalte componente ale acestuia, asigurând legătura and independența între elementele sistemului"
+      },
+      {
+        "isCorrect": true,
+        "text": "Obiectivul general al unui SGBD is de a furniza suportul software complet for dezvoltarea de applications information-system cu database de data"
+      },
+      {
+        "isCorrect": true,
+        "text": "Arhitectura pe componente a unui SGBD is compusă din: kernel, interfaces and tools"
+      },
+      {
+        "isCorrect": true,
+        "text": "SGBD is un ansamblu complex de programe care asigură interface între o database de data and users it"
+      },
+      {
+        "isCorrect": true,
+        "text": "Funcțiile de database ale unui SGBD are description, manipulation, use, administration"
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "question": "The PL/SQL language:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "is a universal programming language"
+      },
+      {
+        "isCorrect": false,
+        "text": "is a data description language"
+      },
+      {
+        "isCorrect": false,
+        "text": "is a modeling language"
+      },
+      {
+        "isCorrect": false,
+        "text": "is an exception-handling language"
+      },
+      {
+        "isCorrect": true,
+        "text": "is a procedural programming language"
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "question": "The functions of a DBMS are:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "program manipulation"
+      },
+      {
+        "isCorrect": false,
+        "text": "program definition"
+      },
+      {
+        "isCorrect": false,
+        "text": "use of the information system"
+      },
+      {
+        "isCorrect": true,
+        "text": "data description"
+      },
+      {
+        "isCorrect": true,
+        "text": "data administration"
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "question": "The following command sequence is given:\ni := 2;\nwhile i<3\nloop\n  i := 4;\n  dbms_output.put_line('The counter value is: ' || i);\nend loop;\nHow many result lines will be displayed:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "una"
+      },
+      {
+        "isCorrect": false,
+        "text": "două"
+      },
+      {
+        "isCorrect": false,
+        "text": "blocul will executes la infinit"
+      },
+      {
+        "isCorrect": false,
+        "text": "blocul does not will executes because not putem folosi dbms_output.put_line within unei bucle"
+      },
+      {
+        "isCorrect": false,
+        "text": "niciuna"
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "question": "Se consideră următoarea secvență de program:\ndeclare\n  cursor cursor1 is select id_angajat, nume from Angajati;\n  vid employees.id_angajat%type;\n  vnume char(20);\nbegin\n  open cursor1;\n  fetch cursor1 into vid, vnume;\nend;\nWhich of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "returnează o error because not conține ciclul LOOP...END LOOP"
+      },
+      {
+        "isCorrect": true,
+        "text": "works with an explicit cursor"
+      },
+      {
+        "isCorrect": false,
+        "text": "works with an implicit cursor"
+      },
+      {
+        "isCorrect": true,
+        "text": "se folosesc variabile scalare"
+      },
+      {
+        "isCorrect": false,
+        "text": "returnează o error because does not închide explicit cursorul"
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "question": "Pentru un cursor in a FOR loop se vor elimina operațiile explicite de:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "optimizare a cursorului"
+      },
+      {
+        "isCorrect": false,
+        "text": "declarare a cursorului"
+      },
+      {
+        "isCorrect": true,
+        "text": "încărcare de data din linia current din cursor în variabile"
+      },
+      {
+        "isCorrect": true,
+        "text": "deschidere a cursorului"
+      },
+      {
+        "isCorrect": true,
+        "text": "închidere a cursorului"
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "question": "Din următoarea structure de bloc PL/SQL:\ndeclare\n  statements;\nbegin\n  statements;\nexception\n  statements;\nend;\n",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "are opționale toate secțiunile"
+      },
+      {
+        "isCorrect": false,
+        "text": "are obligatorii toate secțiunile"
+      },
+      {
+        "isCorrect": true,
+        "text": "is obligatorie doar section executable"
+      },
+      {
+        "isCorrect": false,
+        "text": "is obligatorie doar section declarative"
+      },
+      {
+        "isCorrect": false,
+        "text": "is missing section for tratarea erorilor"
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "question": "The attributes of an explicit cursor are:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "%FETCH, %CLOSE; %OPEN"
+      },
+      {
+        "isCorrect": false,
+        "text": "%ISOPEN, %NOTFOUND, %ROWCOUNT"
+      },
+      {
+        "isCorrect": false,
+        "text": "%ISCLOSE, %FOUND, %ROWCOUNT"
+      },
+      {
+        "isCorrect": true,
+        "text": "%ROWCOUNT, %FOUND, %ISOPEN"
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "question": "In PL/SQL, the following SQL commands cannot be executed directly:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "ALTER"
+      },
+      {
+        "isCorrect": true,
+        "text": "GRANT"
+      },
+      {
+        "isCorrect": true,
+        "text": "CREATE, DROP"
+      },
+      {
+        "isCorrect": false,
+        "text": "COMMIT, SAVEPOINT"
+      },
+      {
+        "isCorrect": false,
+        "text": "DELETE, UPDATE"
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "question": "A DBMS enables the following activities:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "data access"
+      },
+      {
+        "isCorrect": true,
+        "text": "data protection"
+      },
+      {
+        "isCorrect": true,
+        "text": "database maintenance"
+      },
+      {
+        "isCorrect": true,
+        "text": "defining the database structure"
+      },
+      {
+        "isCorrect": false,
+        "text": "building reports and charts"
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "question": "Which of the following PL/SQL variable definitions are erroneous:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "v_salariul NUMBER NOT NULL;"
+      },
+      {
+        "isCorrect": true,
+        "text": "v_data_comanda := SYSDATE;"
+      },
+      {
+        "isCorrect": false,
+        "text": "v_nume VARCHAR2(15) DEFAULT 'Ion';"
+      },
+      {
+        "isCorrect": true,
+        "text": "v_prenume VARCHAR2(5) := 'Anastasia Nicoleta Ioana';"
+      },
+      {
+        "isCorrect": false,
+        "text": "v_test BOOLEAN NOT NULL:=FALSE;"
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "question": "The following command sequence is given:\ndeclare\n  nota_examen NUMBER;\nbegin\n  if nota_examen >= 5 then\n    dbms_output.put_line('passed');\n  else\n    dbms_output.put_line('nepassed');\n  end if;\nend;\nWhich statements are erroneous:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "NULL will be displayed"
+      },
+      {
+        "isCorrect": true,
+        "text": "“not passed” is displayed if the obtained grade is less than 5 and “passed” otherwise"
+      },
+      {
+        "isCorrect": true,
+        "text": "nothing will be displayed"
+      },
+      {
+        "isCorrect": true,
+        "text": "se displays passed"
+      },
+      {
+        "isCorrect": false,
+        "text": "se displays nepassed"
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "question": "The %FOUND attribute characterizes:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "a virtual table"
+      },
+      {
+        "isCorrect": true,
+        "text": "an implicit cursor"
+      },
+      {
+        "isCorrect": false,
+        "text": "a record"
+      },
+      {
+        "isCorrect": false,
+        "text": "a predefined exception"
+      },
+      {
+        "isCorrect": true,
+        "text": "an explicit cursor"
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "question": "Consider the PL/SQL block:\ndeclare\n  cursor c1 is select * from employees order by salary desc;\nbegin\n  for r1 in c1\n  loop\n    dbms_output.put_line(r1.nume);\n  end loop;\nend;\nCare din următoarele afirmații are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "an alternative control structure is used"
+      },
+      {
+        "isCorrect": false,
+        "text": "se will generate an error because not is specificată condiția de ieandre din structure repetitive"
+      },
+      {
+        "isCorrect": true,
+        "text": "se displays numele tuturor angajaților"
+      },
+      {
+        "isCorrect": true,
+        "text": "an explicit cursor is used"
+      },
+      {
+        "isCorrect": false,
+        "text": "se displays numele primilor employees cu cel greater than salary"
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "question": "Which of the following PL/SQL constructs are correct?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "exception when too_many_rows then secv_comenzi; end;"
+      },
+      {
+        "isCorrect": false,
+        "text": "exception when others then secv_comenzi; when no_data_found them secv_comenzi2; end;"
+      },
+      {
+        "isCorrect": false,
+        "text": "exception when no_data_found then secv_comenzi1; when no_data_found then secv_comenzi2; when others then secv_comenzi3; end;"
+      },
+      {
+        "isCorrect": true,
+        "text": "exception when others then secv_comenzi; end;"
+      },
+      {
+        "isCorrect": true,
+        "text": "exception when no_data_found then secv_comenzi1; when others then secv_comenzi2; end;"
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "question": "Can OUT parameters defined in a procedure receive default values?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "True"
+      },
+      {
+        "isCorrect": true,
+        "text": "False"
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "question": "Consider the PL/SQL block:\ncreate or replace procedure sal_mediu (p_sal_mediu OUT NUMBER)\nis\nbegin\n  select avg(salary) into p_sal_mediu from employees;\nend; /\nCare din următoarele afirmații are correct:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "within comenzilor din corpul procedurii se uses o funcție de grup"
+      },
+      {
+        "isCorrect": true,
+        "text": "procedure primește un parameter de ieandre"
+      },
+      {
+        "isCorrect": true,
+        "text": "se creates un subprogram"
+      },
+      {
+        "isCorrect": false,
+        "text": "generates error because is missing command RETURN"
+      },
+      {
+        "isCorrect": false,
+        "text": "generates error because command SELECT are structure incorectă"
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "question": "The objectives of a DBMS are:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "ensuring data shareability"
+      },
+      {
+        "isCorrect": false,
+        "text": "ensuring material resources"
+      },
+      {
+        "isCorrect": false,
+        "text": "ensuring data dependence on applications"
+      },
+      {
+        "isCorrect": true,
+        "text": "ensuring minimal and controlled data redundancy"
+      },
+      {
+        "isCorrect": true,
+        "text": "ensuring data protection"
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "question": "Care dintr următoarele convenții ce primesc parametrii formali and reali ai unui subprogram are variabile în PL/SQL:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "must să fie acelaand number de parameters"
+      },
+      {
+        "isCorrect": false,
+        "text": "parametrii not must să fie în aceeaand ordine"
+      },
+      {
+        "isCorrect": true,
+        "text": "parametrii must să fie în aceeaand ordine"
+      },
+      {
+        "isCorrect": false,
+        "text": "tipul for fiecare parameter corespunzător must să fie diferit"
+      },
+      {
+        "isCorrect": false,
+        "text": "numele parametrilor din cele două categorii cannot be diferite"
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "question": "Can packages be defined that contain only the specification part?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "True"
+      },
+      {
+        "isCorrect": false,
+        "text": "False"
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "question": "Can packages be defined that contain only the package body?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "True"
+      },
+      {
+        "isCorrect": true,
+        "text": "False"
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "question": "Can the package body be changed without modifying its specification?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "True"
+      },
+      {
+        "isCorrect": false,
+        "text": "False"
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "question": "Can functions be defined with the same name as predefined ones?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "True"
+      },
+      {
+        "isCorrect": false,
+        "text": "False"
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "question": "Se poate declares o procedură în specificații, dar fără să fie explicitată în corpul pachetului? Dar invers?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "True, True"
+      },
+      {
+        "isCorrect": false,
+        "text": "True, False"
+      },
+      {
+        "isCorrect": true,
+        "text": "False, True"
+      },
+      {
+        "isCorrect": false,
+        "text": "False, False"
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "question": "What will the PL/SQL block display?\nbegin\n  if sql%found then dbms_output.put_line(0);\n  else dbms_output.put_line(1);\n  end if;\nend;",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "0"
+      },
+      {
+        "isCorrect": true,
+        "text": "1"
+      },
+      {
+        "isCorrect": false,
+        "text": "will generate a compilation error"
+      },
+      {
+        "isCorrect": false,
+        "text": "will raise an exception"
+      },
+      {
+        "isCorrect": false,
+        "text": "NULL"
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "question": "What will the PL/SQL block display?\nbegin\n  if not sql%found then dbms_output.put_line(0);\n  else dbms_output.put_line(1);\n  end if;\nend;",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "0"
+      },
+      {
+        "isCorrect": true,
+        "text": "1"
+      },
+      {
+        "isCorrect": false,
+        "text": "will generate a compilation error"
+      },
+      {
+        "isCorrect": false,
+        "text": "will raise an exception"
+      },
+      {
+        "isCorrect": false,
+        "text": "NULL"
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "question": "Which of the following PL/SQL variable declarations are erroneous:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "v_salariul NUMBER NOT NULL;"
+      },
+      {
+        "isCorrect": false,
+        "text": "v_data_comanda:= SYSDATE;"
+      },
+      {
+        "isCorrect": true,
+        "text": "v_prenume VARCHAR2(5):= 'Anastasia Nicoleta';"
+      },
+      {
+        "isCorrect": false,
+        "text": "v_nume VARCHAR2(15) DEFAULT 'Ion';"
+      },
+      {
+        "isCorrect": true,
+        "text": "v_test BOOLEAN NOT NULL:= FALSE;"
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "question": "Se consideră creată successfully function PL/SQL cu următorul antet: FUNCTION afiseaza_salarul (p_id employees.id_angajat%TYPE) RETURN NUMBER. Care dintre următoarele variants de call are correct:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "EXECUTE DBMS_OUTPUT.PUT_LINE(afiseaza_salarul(100))"
+      },
+      {
+        "isCorrect": false,
+        "text": "EXECUTE afiseaza_salarul(100)"
+      },
+      {
+        "isCorrect": true,
+        "text": "DECLARE v_sal employees.salary%TYPE; BEGIN v_sal := afiseaza_salarul(100); DBMS_OUTPUT.PUT_LINE('Salarul is: '||v_sal); END;"
+      },
+      {
+        "isCorrect": true,
+        "text": "SELECT id_functie, afiseaza_salarul(id_angajat) AS salariv FROM employees;"
+      },
+      {
+        "isCorrect": false,
+        "text": "CALL afiseaza_salarul(100)"
+      }
+    ]
+  },
+  {
+    "id": 113,
+    "question": "The following PL/SQL sequence is given: DECLARE exc EXCEPTION; nr NUMBER; rez NUMBER; BEGIN UPDATE employees SET salary=salary*0.1; SELECT COUNT(id_angajat) INTO nr FROM employees; rez := SQL%ROWCOUNT; IF rez = 1 THEN DBMS_OUTPUT.PUT_LINE('A'); ELSIF rez > 1 THEN DBMS_OUTPUT.PUT_LINE('B'); ELSE RAISE exc; END IF; EXCEPTION WHEN exc THEN DBMS_OUTPUT.PUT_LINE('C'); END;. Tabela employees conține minim 100 de rows. Blocul PL/SQL:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "generates un mesaj de error because does not uses corect cursorul implicit"
+      },
+      {
+        "isCorrect": false,
+        "text": "displays B"
+      },
+      {
+        "isCorrect": true,
+        "text": "uses o structure de control alternative"
+      },
+      {
+        "isCorrect": false,
+        "text": "displays A"
+      },
+      {
+        "isCorrect": false,
+        "text": "displays C"
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "question": "The following command sequence is given: CREATE OR REPLACE PROCEDURE modifica(p_id IN clients.id_client%type) IS BEGIN UPDATE clients SET limita_credit=2500 WHERE id_client=p_id; END;. CREATE OR REPLACE PROCEDURE exemplu IS v_id clients.id_client%type; CURSOR cl IS SELECT id_client FROM clients; BEGIN OPEN cl; FOR i IN 1..4 LOOP FETCH cl INTO v_id; modifica(v_id); END LOOP; END;. EXECUTE exemplu;. Which of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "se will generate an error becauwillriable i usedă în structure repetitive not a fost declarată"
+      },
+      {
+        "isCorrect": true,
+        "text": "se creates două proceduri stocate"
+      },
+      {
+        "isCorrect": true,
+        "text": "se modifică limit de credit for 4 clients"
+      },
+      {
+        "isCorrect": true,
+        "text": "se uses callul unei proceduri din altă procedură"
+      },
+      {
+        "isCorrect": false,
+        "text": "se will generate an error because procedure exemplu not are parameters"
+      }
+    ]
+  },
+  {
+    "id": 115,
+    "question": "Specify which of the following are functions of a DBMS:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "data manipulation"
+      },
+      {
+        "isCorrect": true,
+        "text": "data description"
+      },
+      {
+        "isCorrect": false,
+        "text": "operating system administration"
+      },
+      {
+        "isCorrect": false,
+        "text": "use of the information system"
+      },
+      {
+        "isCorrect": false,
+        "text": "program definition"
+      }
+    ]
+  },
+  {
+    "id": 116,
+    "question": "What will the PL/SQL block display: SET SERVEROUTPUT ON DECLARE CURSOR c IS SELECT nume FROM employees; r c%ROWTYPE; BEGIN FETCH c INTO r; DBMS_OUTPUT.PUT_LINE('The name is '||r.nume); EXCEPTION WHEN NO_DATA_FOUND THEN DBMS_OUTPUT.PUT_LINE('A'); WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('B'); END;",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "will display the name of the first employee"
+      },
+      {
+        "isCorrect": false,
+        "text": "will display both A and B"
+      },
+      {
+        "isCorrect": false,
+        "text": "will display the names of all employees"
+      },
+      {
+        "isCorrect": true,
+        "text": "will display B"
+      },
+      {
+        "isCorrect": false,
+        "text": "will display A"
+      }
+    ]
+  },
+  {
+    "id": 117,
+    "question": "The following command sequence is given: SET SERVEROUTPUT ON DECLARE nota_examen NUMBER; BEGIN IF nota_examen >= 5 THEN dbms_output.put_line('passed!'); ELSE dbms_output.put_line('nepassed!'); END IF; END;. Which statements are correct:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "“not passed!” is displayed"
+      },
+      {
+        "isCorrect": false,
+        "text": "nothing will be displayed"
+      },
+      {
+        "isCorrect": false,
+        "text": "NULL will be displayed"
+      },
+      {
+        "isCorrect": false,
+        "text": "“not passed!” is displayed if the obtained grade is less than 5 and “passed!” otherwise"
+      },
+      {
+        "isCorrect": false,
+        "text": "“passed!” is displayed"
+      }
+    ]
+  },
+  {
+    "id": 118,
+    "question": "Among the objectives of a DBMS are:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "ensuring material resources"
+      },
+      {
+        "isCorrect": true,
+        "text": "ensuring minimal and controlled data redundancy"
+      },
+      {
+        "isCorrect": false,
+        "text": "ensuring data dependence on applications"
+      },
+      {
+        "isCorrect": true,
+        "text": "ensuring data shareability"
+      },
+      {
+        "isCorrect": true,
+        "text": "ensuring data protection"
+      }
+    ]
+  },
+  {
+    "id": 119,
+    "question": "Specify which of the following statements are true (SGBD):",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "SGBD is componenta software a unui system de database de data care interacționează cu toate celelalte componente ale acestuia, asigurând legătura and interdependența între elementele sistemului"
+      },
+      {
+        "isCorrect": true,
+        "text": "SGBD is un ansamblu complex de programe care asigură interface între o database de data and users it"
+      },
+      {
+        "isCorrect": true,
+        "text": "the objective general al unui SGBD is de a furniza suportul software complet for dezvoltarea de applications information-system cu baze de data"
+      },
+      {
+        "isCorrect": true,
+        "text": "functions de database ale unui SGBD are: description, manipulation, use, administration"
+      },
+      {
+        "isCorrect": true,
+        "text": "arhitectura pe componente a unui SGBD is compusă din: kernel, interfaces and tools"
+      }
+    ]
+  },
+  {
+    "id": 120,
+    "question": "The PL/SQL language:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "is a universal programming language"
+      },
+      {
+        "isCorrect": false,
+        "text": "is an exception-handling language"
+      },
+      {
+        "isCorrect": false,
+        "text": "is a data description language"
+      },
+      {
+        "isCorrect": true,
+        "text": "is a procedural programming language"
+      },
+      {
+        "isCorrect": false,
+        "text": "is a modeling language"
+      }
+    ]
+  },
+  {
+    "id": 121,
+    "question": "Care will fi efectul executiei urmatorului bloc PL/SQL? DECLARE exista_tabela EXCEPTION; PRAGMA EXCEPTION_INIT(exista_tabela,-00955); BEGIN",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "Error report - ORA-00955: name is already used by an existing object"
+      }
+    ]
+  },
+  {
+    "id": 122,
+    "question": "The following command sequence is given: i := 2; WHILE i < 3 LOOP i := 4; DBMS_OUTPUT.PUT_LINE('The value of counter i is: ' || i); END LOOP;. How many result lines will be displayed:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "una"
+      },
+      {
+        "isCorrect": false,
+        "text": "blocul does not will executes because not putem folosi dbms_output.put_line within unei bucle"
+      },
+      {
+        "isCorrect": false,
+        "text": "două"
+      },
+      {
+        "isCorrect": false,
+        "text": "niciuna"
+      },
+      {
+        "isCorrect": false,
+        "text": "blocul will executes la infinit"
+      }
+    ]
+  },
+  {
+    "id": 123,
+    "question": "The attributes of an explicit cursor are:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "%FETCH, %CLOSE, %OPEN"
+      },
+      {
+        "isCorrect": true,
+        "text": "%ROWCOUNT, %FOUND, %ISOPEN"
+      },
+      {
+        "isCorrect": false,
+        "text": "%ISOPEN, %NOTFOUND, %ROWCOUNT"
+      },
+      {
+        "isCorrect": false,
+        "text": "%ROWNUMBER, %NOTFOUND, %FOUND"
+      },
+      {
+        "isCorrect": false,
+        "text": "%ISCLOSE, %FOUND, %ROWCOUNT"
+      }
+    ]
+  },
+  {
+    "id": 124,
+    "question": "Which of the following PL/SQL variable definitions are erroneous:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "v_salariul NUMBER NOT NULL;"
+      },
+      {
+        "isCorrect": true,
+        "text": "v_prenume VARCHAR2(5):= 'Anastasia Nicoleta Ioana';"
+      },
+      {
+        "isCorrect": true,
+        "text": "v_data_comanda:= SYSDATE;"
+      },
+      {
+        "isCorrect": false,
+        "text": "v_test BOOLEAN NOT NULL:= FALSE;"
+      },
+      {
+        "isCorrect": false,
+        "text": "v_nume VARCHAR2(15) DEFAULT 'Ion';"
+      }
+    ]
+  },
+  {
+    "id": 125,
+    "question": "In PL/SQL, the following SQL commands cannot be executed directly:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "ALTER"
+      },
+      {
+        "isCorrect": false,
+        "text": "COMMIT, SAVEPOINT"
+      },
+      {
+        "isCorrect": true,
+        "text": "GRANT"
+      },
+      {
+        "isCorrect": false,
+        "text": "DELETE, UPDATE"
+      },
+      {
+        "isCorrect": true,
+        "text": "CREATE, DROP"
+      }
+    ]
+  },
+  {
+    "id": 126,
+    "question": "Consider the PL/SQL block: DECLARE CURSOR c1 IS SELECT * FROM employees ORDER BY salary DESC; BEGIN FOR r1 IN c1 LOOP DBMS_OUTPUT.PUT_LINE(c1.nume); END LOOP; END;. Which of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "generates error because of folosirii incorecte a cursorului"
+      },
+      {
+        "isCorrect": false,
+        "text": "se displays numele primilor employees cu cel greater than salary"
+      },
+      {
+        "isCorrect": false,
+        "text": "se displays numele tuturor angajaților"
+      },
+      {
+        "isCorrect": true,
+        "text": "se declares în mod explicit un cursor"
+      },
+      {
+        "isCorrect": true,
+        "text": "se will generate an error because not is specificată condiția de ieandre din structure repetitive"
+      }
+    ]
+  },
+  {
+    "id": 127,
+    "question": "Consider the PL/SQL block: DECLARE CURSOR c1 IS SELECT * FROM employees ORDER BY salary DESC; BEGIN FOR r1 IN c1 LOOP DBMS_OUTPUT.PUT_LINE(r1.nume); END LOOP; END;. Which of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "an alternative control structure is used"
+      },
+      {
+        "isCorrect": true,
+        "text": "an explicit cursor is used"
+      },
+      {
+        "isCorrect": false,
+        "text": "se will generate an error because not is specificată condiția de ieandre din structure repetitive"
+      },
+      {
+        "isCorrect": false,
+        "text": "se displays numele primilor employees cu cel greater than salary"
+      },
+      {
+        "isCorrect": true,
+        "text": "se displays numele tuturor angajaților"
+      }
+    ]
+  },
+  {
+    "id": 128,
+    "question": "Consider the PL/SQL block: CREATE OR REPLACE PROCEDURE sal_mediu(p_sal_mediu OUT NUMBER) IS p_sal_mediu NUMBER; BEGIN SELECT AVG(salary) INTO p_sal_mediu FROM employees; END;. Which of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "procedure primește un parameter de ieandre"
+      },
+      {
+        "isCorrect": false,
+        "text": "generates error because is missing command RETURN"
+      },
+      {
+        "isCorrect": false,
+        "text": "generates error because trebuia creată o funcție"
+      },
+      {
+        "isCorrect": true,
+        "text": "generates error because of definirii variabilei locale"
+      },
+      {
+        "isCorrect": true,
+        "text": "within comenzilor din corpul procedurii se uses o funcție de grup"
+      }
+    ]
+  },
+  {
+    "id": 129,
+    "question": "Consider the PL/SQL block: CREATE OR REPLACE PROCEDURE sal_mediu(p_sal_mediu OUT NUMBER) IS p_sal_mediu NUMBER; BEGIN SELECT AVG(salary) INTO p_sal_mediu FROM employees; END; / Which of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "procedure primește un parameter de ieandre"
+      },
+      {
+        "isCorrect": true,
+        "text": "within comenzilor din corpul procedurii se uses o funcție de grup"
+      },
+      {
+        "isCorrect": false,
+        "text": "generates error because is missing command RETURN"
+      },
+      {
+        "isCorrect": false,
+        "text": "generates error because must creată o funcție"
+      },
+      {
+        "isCorrect": true,
+        "text": "generates error because of definirii variabilei locale"
+      }
+    ]
+  },
+  {
+    "id": 130,
+    "question": "The functions of a DBMS are: A. program definition B. data description C. program manipulation D. data administration E. use of the information system",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "A + C + E"
+      },
+      {
+        "isCorrect": true,
+        "text": "B + D"
+      },
+      {
+        "isCorrect": false,
+        "text": "A + B + C + D + E"
+      },
+      {
+        "isCorrect": false,
+        "text": "B + C + E"
+      },
+      {
+        "isCorrect": false,
+        "text": "A + B"
+      }
+    ]
+  },
+  {
+    "id": 131,
+    "question": "Din următoarea structure de bloc PL/SQL: DECLARE Instrucțiuni; BEGIN Instrucțiuni; EXCEPTION Instrucțiuni; END; Alegeți o opțiune:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "is obligatorie doar partea declarative"
+      },
+      {
+        "isCorrect": false,
+        "text": "are obligatorii toate părțile"
+      },
+      {
+        "isCorrect": false,
+        "text": "is missing partea for tratarea erorilor"
+      },
+      {
+        "isCorrect": false,
+        "text": "are opționale toate părțile"
+      },
+      {
+        "isCorrect": true,
+        "text": "is obligatorie doar partea executable"
+      }
+    ]
+  },
+  {
+    "id": 132,
+    "question": "Consider the PL/SQL block: CREATE OR REPLACE PROCEDURE sal_mediu (p_sal_mediu OUT NUMBER) IS BEGIN SELECT AVG(salary) INTO p_sal_mediu FROM employees; END; / Care dintre următoarele grupări de afirmații are correct: A. se creates un subprogram B. procedure primește un parameter de ieandre C. within comenzilor din corpul procedurii se uses o funcție de grup D. generates error because is missing command RETURN E. generates error because command SELECT are structure incorectă",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "D"
+      },
+      {
+        "isCorrect": true,
+        "text": "A + B + C + D + E"
+      },
+      {
+        "isCorrect": false,
+        "text": "A + B + E"
+      },
+      {
+        "isCorrect": false,
+        "text": "E"
+      },
+      {
+        "isCorrect": true,
+        "text": "A + B + C"
+      }
+    ]
+  },
+  {
+    "id": 133,
+    "question": "The %TYPE attribute. Select one or more:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "it is an attribute used only to specify the data type of subprogram parameters"
+      },
+      {
+        "isCorrect": false,
+        "text": "allows us to take the type of an exception"
+      },
+      {
+        "isCorrect": false,
+        "text": "none of the stated options"
+      },
+      {
+        "isCorrect": true,
+        "text": "specifies the data type of a variable when we declare it"
+      },
+      {
+        "isCorrect": false,
+        "text": "allows us to take the data type of a record"
+      }
+    ]
+  },
+  {
+    "id": 134,
+    "question": "Consider the following PL/SQL block (cod cu statements SQL în bloc PL/SQL). Which of the following statements are correct: Selectați unul or mai multe:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "may occur excepția too_many_rows"
+      },
+      {
+        "isCorrect": true,
+        "text": "command ROLLBACK is permisă in a bloc PL/SQL"
+      },
+      {
+        "isCorrect": false,
+        "text": "is afisat mesajul erorii"
+      },
+      {
+        "isCorrect": true,
+        "text": "blocul se executes fara errors"
+      },
+      {
+        "isCorrect": false,
+        "text": "command UPDATE not is permisă in a bloc PL/SQL"
+      }
+    ]
+  },
+  {
+    "id": 135,
+    "question": "A relational DBMS ensures data integrity through: Selectați unul or mai multe:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "transaction management mechanisms"
+      },
+      {
+        "isCorrect": false,
+        "text": "use of virtual tables"
+      },
+      {
+        "isCorrect": true,
+        "text": "automatic data recovery procedures in case of incidents"
+      },
+      {
+        "isCorrect": false,
+        "text": "mecanisme de accesor la data"
+      },
+      {
+        "isCorrect": false,
+        "text": "encryption procedures"
+      }
+    ]
+  },
+  {
+    "id": 136,
+    "question": "Care dintre urmatoarele afirmații despre cursorul anonim not is adevarata? Selectați unul or mai multe:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Niciuna dintre variants"
+      },
+      {
+        "isCorrect": false,
+        "text": "Nu are denumire"
+      },
+      {
+        "isCorrect": true,
+        "text": "Permite utilizarea atributelor cursorului"
+      },
+      {
+        "isCorrect": false,
+        "text": "Nu can be imbricati"
+      },
+      {
+        "isCorrect": false,
+        "text": "Nu necesita declararea"
+      }
+    ]
+  },
+  {
+    "id": 137,
+    "question": "Given the following code sequence: DECLARE X NUMBER(3); Y NUMBER(3); BEGIN X:=100; IF x <> y THEN a('test'); END IF; END; / Unde a is o procedure for afisare. Ce will display? Selectați unul or mai multe:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "test"
+      },
+      {
+        "isCorrect": false,
+        "text": "TRUE"
+      },
+      {
+        "isCorrect": false,
+        "text": "100"
+      },
+      {
+        "isCorrect": true,
+        "text": "O error"
+      },
+      {
+        "isCorrect": true,
+        "text": "Nu will display nimic"
+      }
+    ]
+  },
+  {
+    "id": 138,
+    "question": "Which of the following blocks are not stored in the database? Selectați unul or mai multe:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "procedures"
+      },
+      {
+        "isCorrect": true,
+        "text": "anonymous blocks"
+      },
+      {
+        "isCorrect": false,
+        "text": "packages"
+      },
+      {
+        "isCorrect": false,
+        "text": "functions"
+      },
+      {
+        "isCorrect": false,
+        "text": "triggers"
+      }
+    ]
+  },
+  {
+    "id": 139,
+    "question": "Which of the following commands cannot be used without EXECUTE IMMEDIATE in PL/SQL blocks? Select one or more:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "INSERT"
+      },
+      {
+        "isCorrect": false,
+        "text": "ROLLBACK"
+      },
+      {
+        "isCorrect": true,
+        "text": "GRANT"
+      },
+      {
+        "isCorrect": false,
+        "text": "SELECT"
+      },
+      {
+        "isCorrect": false,
+        "text": "SAVEPOINT"
+      }
+    ]
+  },
+  {
+    "id": 140,
+    "question": "Fie secventa de cod: CREATE or REPLACE PROCEDURE sal_mediu (p_sal_mediu IN number) IS BEGIN Select AVG(salary) into p_sal_mediu from employees; END; / What happens when it runs? Selectați unul or mai multe:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "none of the stated options"
+      },
+      {
+        "isCorrect": false,
+        "text": "Se creates o procedure fara errors de compilare care calculeaza salary mediu for fiecare departament"
+      },
+      {
+        "isCorrect": true,
+        "text": "Apare o error"
+      },
+      {
+        "isCorrect": false,
+        "text": "Se creates o procedure fara errors de compilare care calculeaza salary mediu"
+      },
+      {
+        "isCorrect": false,
+        "text": "Se creates procedure sal_mediu fara errors de compilare"
+      }
+    ]
+  },
+  {
+    "id": 141,
+    "question": "The following command sequence is given: create or replace FUNCTION f_emp_vechime (p_data_angajare IN employees.data_angajare%type) return number is begin return to_number(round(sysdate - p_data_angajare)); end f_emp_vechime; / Which of the following statements are correct: Selectați unul or mai multe:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "function poate fi callata doar in a bloc PL/SQL"
+      },
+      {
+        "isCorrect": false,
+        "text": "generates o error because parametrul functiei not is definit corespunzator"
+      },
+      {
+        "isCorrect": false,
+        "text": "generates o error because is missing command SELECT"
+      },
+      {
+        "isCorrect": true,
+        "text": "function returnează nr de zile dintre data current and data received ca parameter"
+      },
+      {
+        "isCorrect": false,
+        "text": "the function returns the number of years between the current date and the date received as a parameter"
+      }
+    ]
+  },
+  {
+    "id": 142,
+    "question": "Specify which of the following statements are true: Selectați unul or mai multe:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "functions de database ale unui SGBD are: asigurarea redundanței minime and controlate, manipulation datelor, partajabilitatea datelor, optimizare"
+      },
+      {
+        "isCorrect": false,
+        "text": "SGBD not are ca obiectiv asigurarea independenței logice and fizice a datelor"
+      }
+    ]
+  },
+  {
+    "id": 143,
+    "question": "Consider the following PL/SQL block: [DECLARE n CONSTANT VARCHAR2(5):=...; a BOOLEAN DEFAULT false; BEGIN IF n IS NOT NULL AND NOT... ELSIF n BETWEEN -1 AND 1... ELSE DBMS_OUTPUT.PUT_LINE('C'); END IF; END;] Blocul PL/SQL afișază:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "C"
+      },
+      {
+        "isCorrect": false,
+        "text": "un mesaj de error because does not uses corect constanta"
+      },
+      {
+        "isCorrect": false,
+        "text": "A"
+      },
+      {
+        "isCorrect": false,
+        "text": "nimic"
+      },
+      {
+        "isCorrect": true,
+        "text": "B"
+      }
+    ]
+  },
+  {
+    "id": 144,
+    "question": "Consider the following PL/SQL block: Which of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "blocul does not will executes because does not uses corect variable p în EXIT"
+      },
+      {
+        "isCorrect": true,
+        "text": "blocul not uses o variabilă de tip record"
+      },
+      {
+        "isCorrect": false,
+        "text": "blocul generates o error because not is necesar EXIT"
+      },
+      {
+        "isCorrect": true,
+        "text": "are afisati primii 5 clients cu limit de credit cea greater than"
+      },
+      {
+        "isCorrect": false,
+        "text": "se declares an explicit cursor"
+      }
+    ]
+  },
+  {
+    "id": 145,
+    "question": "Given the following code sequence: declare v_rez number; begin v_rez:=sp_nr(2800); dbms_output.put_line(v_rez); end; / What is the role of this sequence?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "Apeleaza o function sp_nr in a bloc"
+      },
+      {
+        "isCorrect": false,
+        "text": "Apeleaza o procedure sp_nr in a bloc"
+      },
+      {
+        "isCorrect": false,
+        "text": "Declanseaza un trigger"
+      },
+      {
+        "isCorrect": false,
+        "text": "Apare o error because sintaxa not is corecta"
+      },
+      {
+        "isCorrect": false,
+        "text": "Declanseaza o exceptie"
+      }
+    ]
+  },
+  {
+    "id": 146,
+    "question": "Which of the following attributes are not specific to the explicit cursor?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "CLOSE"
+      },
+      {
+        "isCorrect": false,
+        "text": "NOTFOUND"
+      },
+      {
+        "isCorrect": false,
+        "text": "ROWCOUNT"
+      },
+      {
+        "isCorrect": false,
+        "text": "FOUND"
+      },
+      {
+        "isCorrect": false,
+        "text": "ISOPEN"
+      }
+    ]
+  },
+  {
+    "id": 147,
+    "question": "Consider the following PL/SQL block: Which of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "declares două variabile scalare"
+      },
+      {
+        "isCorrect": true,
+        "text": "blocul not displays nimic"
+      },
+      {
+        "isCorrect": false,
+        "text": "uses an implicit cursor"
+      },
+      {
+        "isCorrect": false,
+        "text": "generates o error"
+      },
+      {
+        "isCorrect": true,
+        "text": "declares an explicit cursor"
+      }
+    ]
+  },
+  {
+    "id": 148,
+    "question": "Se consideră table Angajați and următoarele secvențe: Precizați care dintre următoarele afirmații is adevărată:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "la operația de ștergere not will apărea excepția -20100 ca urmare a execuției declanșătorului"
+      },
+      {
+        "isCorrect": false,
+        "text": "apare o error because pseudo-variable new not is precedata de \":\""
+      },
+      {
+        "isCorrect": true,
+        "text": "declanșătorul se executes for fiecare înregistrare din table Angajati"
+      },
+      {
+        "isCorrect": false,
+        "text": "operația de actualizare will realiza successfullys for cei care au the value noua a salariului peste 1000"
+      },
+      {
+        "isCorrect": true,
+        "text": "declanșătorul se compiles successfully"
+      }
+    ]
+  },
+  {
+    "id": 149,
+    "question": "Given the following code sequence: DECLARE x number(8); BEGIN Select sum(salary) into x from employees where id_departament = 1500; END; / Avand in vedere ca departamentul cu id-ul 1500 not exista, ce se intampla la rulare?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Valoarea lui x will fi 1500"
+      },
+      {
+        "isCorrect": true,
+        "text": "Valoarea lui x will fi nula"
+      },
+      {
+        "isCorrect": false,
+        "text": "Apare o error"
+      },
+      {
+        "isCorrect": false,
+        "text": "Se raises exceptia NO DATA FOUND"
+      },
+      {
+        "isCorrect": false,
+        "text": "Valoarea lui x will fi 0"
+      }
+    ]
+  },
+  {
+    "id": 150,
+    "question": "Se consideră următoare secvență de commands: create or replace trigger before insert on rand_comenzi for each row declare v_stoc stocuri.stoc%type; begin select stoc into v_stoc from... if :new.cantitate > v_stoc... :new.cantitate:=v_stoc; end if; update rand_comenzi set stoc=stoc-:new.cantitate where id_produs=:new.id_produs; end; / Specify which of the following statements are true:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "generates o error de sintaxa because DECLARE is o sectiune a blocurilor anonime"
+      },
+      {
+        "isCorrect": true,
+        "text": "must tratata exceptia NO_DATA_FOUND"
+      },
+      {
+        "isCorrect": false,
+        "text": "actualizarea tabelei rand_comenzi not is posibila"
+      },
+      {
+        "isCorrect": true,
+        "text": "declanșătorul will modifica în funcție de stocul disponibil cantitatea comandată"
+      },
+      {
+        "isCorrect": false,
+        "text": "conditia not e formulata corect for a permite gestionarea corecta a stocului"
+      }
+    ]
+  },
+  {
+    "id": 151,
+    "question": "What is the role of block labeling?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "it allows a variable to be prefixed for use"
+      },
+      {
+        "isCorrect": false,
+        "text": "it associates a name with the block so it can be stored in the database"
+      },
+      {
+        "isCorrect": false,
+        "text": "it is mandatory when we have nested blocks"
+      },
+      {
+        "isCorrect": false,
+        "text": "it allows the use of directives"
+      },
+      {
+        "isCorrect": false,
+        "text": "block labeling is not possible"
+      }
+    ]
+  },
+  {
+    "id": 152,
+    "question": "Triggers",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "they are used only for physical tables"
+      },
+      {
+        "isCorrect": false,
+        "text": "none of the stated options"
+      },
+      {
+        "isCorrect": false,
+        "text": "they are triggered when exceptional situations related to the connection occur"
+      },
+      {
+        "isCorrect": true,
+        "text": "they are triggered by one or more update operations"
+      },
+      {
+        "isCorrect": false,
+        "text": "DECLARE is never used in triggers"
+      }
+    ]
+  },
+  {
+    "id": 153,
+    "question": "Among the advantages of a DBMS are:",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "include mechanisms for optimizing data access"
+      },
+      {
+        "isCorrect": false,
+        "text": "implementeaza data normalization"
+      },
+      {
+        "isCorrect": false,
+        "text": "is asigurata data dependence on the physical storage medium"
+      },
+      {
+        "isCorrect": false,
+        "text": "permite optimizarea subprogramelor"
+      },
+      {
+        "isCorrect": true,
+        "text": "uses selectia, proiectia, jonctiunea, produsul cartezian etc. în regăsirea datelor"
+      }
+    ]
+  },
+  {
+    "id": 154,
+    "question": "Consider the following PL/SQL block: Which of the following statements are correct:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "generates error de sintaxa"
+      },
+      {
+        "isCorrect": true,
+        "text": "function generates error because parametrul is incorect specificat"
+      },
+      {
+        "isCorrect": true,
+        "text": "blocul creates successfully un subprogram"
+      },
+      {
+        "isCorrect": false,
+        "text": "blocul defines incorect o variabilă locală"
+      }
+    ]
+  },
+  {
+    "id": 155,
+    "question": "When declaring a variable, it is necessary to:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "we specify whether it is null or not"
+      },
+      {
+        "isCorrect": true,
+        "text": "we specify the data type"
+      },
+      {
+        "isCorrect": false,
+        "text": "we specify whether it is constant or not"
+      },
+      {
+        "isCorrect": false,
+        "text": "we initialize it"
+      },
+      {
+        "isCorrect": false,
+        "text": "it receives a default value"
+      }
+    ]
+  },
+  {
+    "id": 156,
+    "question": "Given the following code sequence: DECLARE CURSOR c(p_id NUMBER, p_id1 NUMBER) IS SELECT id_departament, nume, salary FROM employees WHERE id_departament = p_id AND salary >= p_id1; BEGIN FOR r IN c(20, 2000) LOOP DBMS_OUTPUT.PUT_LINE(r.id_departament|| ' '||r.nume||' ' ||r.salary); END LOOP; FOR r IN c(30, 3000) LOOP DBMS_OUTPUT.PUT_LINE(r.id_departament|| ' '||r.nume ||' ' ||r.salary); END LOOP; END; / What happens when it runsa codului?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Apare o error because cursorii ar fi trebuit imbricati"
+      },
+      {
+        "isCorrect": false,
+        "text": "Apare o error because unul dintre departments not exista, eroarea nefiind tratata"
+      },
+      {
+        "isCorrect": true,
+        "text": "Se executes un cursor cu 2 parameters de 2 ori"
+      },
+      {
+        "isCorrect": false,
+        "text": "Defineste 2 cursori cu 2 parameters and se executes"
+      },
+      {
+        "isCorrect": false,
+        "text": "Niciuna dintre variants"
+      }
+    ]
+  },
+  {
+    "id": 157,
+    "question": "Given the following code sequence: CREATE OR REPLACE TRIGGER generare_codprodus BEFORE INSERT ON produse FOR EACH ROW WHEN (new.id_produs> 3000) BEGIN SELECT seq.nextval INTO :new.id_produs FROM dual; END; / Ce will intampla la rulare?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "Se creates un trigger care will declansa"
+      },
+      {
+        "isCorrect": false,
+        "text": "Apare o error because in WHEN (new.id_produs> 3000) new trebuia sa aiba :"
+      },
+      {
+        "isCorrect": false,
+        "text": "none of the stated options"
+      },
+      {
+        "isCorrect": false,
+        "text": "Se creates un trigger cu errors de compilare"
+      },
+      {
+        "isCorrect": false,
+        "text": "Nu se raises because the value lui new pt id_produs not is cunoscuta inca"
+      }
+    ]
+  },
+  {
+    "id": 158,
+    "question": "Which of the following methods cannot be used on an INDEX BY TABLE variable?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "PREVIOUS"
+      },
+      {
+        "isCorrect": false,
+        "text": "FIRST"
+      },
+      {
+        "isCorrect": false,
+        "text": "DELETE"
+      },
+      {
+        "isCorrect": true,
+        "text": "ROWCOUNT"
+      },
+      {
+        "isCorrect": false,
+        "text": "EXISTS"
+      }
+    ]
+  },
+  {
+    "id": 159,
+    "question": "Which of the following sections is mandatory?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "BEGIN"
+      },
+      {
+        "isCorrect": false,
+        "text": "EXECUTE"
+      },
+      {
+        "isCorrect": false,
+        "text": "EXCEPTION"
+      },
+      {
+        "isCorrect": false,
+        "text": "EXCECUTE IMMEDIATE"
+      },
+      {
+        "isCorrect": false,
+        "text": "DECLARE"
+      }
+    ]
+  },
+  {
+    "id": 160,
+    "question": "For non-predefined exceptions:",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "they must be propagated to the calling environment"
+      },
+      {
+        "isCorrect": false,
+        "text": "they must be assigned an error code defined by the DBMS"
+      },
+      {
+        "isCorrect": true,
+        "text": "they must be declared"
+      },
+      {
+        "isCorrect": false,
+        "text": "they must be assigned a user-defined error code"
+      },
+      {
+        "isCorrect": false,
+        "text": "they must be handled"
+      }
+    ]
+  },
+  {
+    "id": 161,
+    "question": "Which of the following statements are correct (despre pachet)?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "the package not is compilat successfully because functions CAUT_ANGAJAT au aceeasi denumire"
+      },
+      {
+        "isCorrect": true,
+        "text": "the package does not compile successfully because the BODY keyword is missing"
+      },
+      {
+        "isCorrect": true,
+        "text": "the functions in the package are overloaded"
+      },
+      {
+        "isCorrect": true,
+        "text": "overloading is not allowed in this context"
+      },
+      {
+        "isCorrect": true,
+        "text": "the variable v_total is public and can be accessed as follows: p_angajati.v_total"
+      }
+    ]
+  },
+  {
+    "id": 162,
+    "question": "Which of the following blocks are not stored in the database?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "functions"
+      },
+      {
+        "isCorrect": false,
+        "text": "procedures"
+      },
+      {
+        "isCorrect": false,
+        "text": "triggers"
+      },
+      {
+        "isCorrect": true,
+        "text": "anonymous blocks"
+      },
+      {
+        "isCorrect": false,
+        "text": "packages"
+      }
+    ]
+  },
+  {
+    "id": 163,
+    "question": "%ROWTYPE",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "it is used only when defining subprogram parameters"
+      },
+      {
+        "isCorrect": false,
+        "text": "none of the stated options"
+      },
+      {
+        "isCorrect": false,
+        "text": "it is a record-type attribute that allows defining a variable according to the programmer’s needs"
+      },
+      {
+        "isCorrect": false,
+        "text": "specifies the data type of a record"
+      },
+      {
+        "isCorrect": true,
+        "text": "it is a record-type attribute that allows defining a variable as having the same type as a record from a table or cursor"
+      }
+    ]
+  },
+  {
+    "id": 164,
+    "question": "Care dintre urmatoarele afirmatii despre cursorul anonim not is adevarata?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Nu are denumire"
+      },
+      {
+        "isCorrect": false,
+        "text": "Niciuna dintre variants"
+      },
+      {
+        "isCorrect": false,
+        "text": "Nu necesita declararea"
+      },
+      {
+        "isCorrect": true,
+        "text": "Nu can be imbricati"
+      },
+      {
+        "isCorrect": true,
+        "text": "Permite utilizarea atributelor cursorului"
+      }
+    ]
+  },
+  {
+    "id": 165,
+    "question": "Given the following code sequence: CREATE or REPLACE PROCEDURE sal_mediu (p_sal_mediu IN number) IS BEGIN Select AVG(salary) into p_sal_mediu from employees; END; / What happens when it runs?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "Se creates o procedure fara errors de compilare care calculeaza salary mediu for fiecare departament"
+      },
+      {
+        "isCorrect": true,
+        "text": "Apare o error"
+      },
+      {
+        "isCorrect": false,
+        "text": "none of the stated options"
+      },
+      {
+        "isCorrect": false,
+        "text": "Se creates procedure sal_mediu fara errors de compilare"
+      },
+      {
+        "isCorrect": false,
+        "text": "Se creates o procedure fara errors de compilare care calculeaza salary mediu"
+      }
+    ]
+  },
+  {
+    "id": 166,
+    "question": "Care dintre urmatoarele commands cannot be utilizate fara EXECUTE IMMEDIATE in blocuri PL/SQL?",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "SELECT"
+      },
+      {
+        "isCorrect": true,
+        "text": "GRANT"
+      },
+      {
+        "isCorrect": false,
+        "text": "SAVEPOINT"
+      },
+      {
+        "isCorrect": false,
+        "text": "INSERT"
+      },
+      {
+        "isCorrect": false,
+        "text": "ROLLBACK"
+      }
+    ]
+  },
+  {
+    "id": 167,
+    "question": "Atributul %TYPE",
+    "answers": [
+      {
+        "isCorrect": false,
+        "text": "allows us to take the type of an exception"
+      },
+      {
+        "isCorrect": false,
+        "text": "none of the stated options"
+      },
+      {
+        "isCorrect": true,
+        "text": "Precizeaza tipul de data al unei variabile atunci cand o declaram"
+      },
+      {
+        "isCorrect": false,
+        "text": "it is an attribute used only to specify the data type of subprogram parameters"
+      },
+      {
+        "isCorrect": false,
+        "text": "allows us to take the data type of a record"
+      }
+    ]
+  },
+  {
+    "id": 168,
+    "question": "Given the following code sequence: DECLARE X NUMBER(3); Y NUMBER(3); BEGIN X:=100; IF x <> y THEN a('test'); END IF; END; / Unde a is o procedure for afisare. Ce will display?",
+    "answers": [
+      {
+        "isCorrect": true,
+        "text": "Nu will display nimic"
+      },
+      {
+        "isCorrect": false,
+        "text": "100"
+      },
+      {
+        "isCorrect": false,
+        "text": "test"
+      },
+      {
+        "isCorrect": false,
+        "text": "TRUE"
+      },
+      {
+        "isCorrect": false,
+        "text": "O error"
+      }
+    ]
+  }
+]

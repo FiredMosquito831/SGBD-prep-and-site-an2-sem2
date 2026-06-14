@@ -1,0 +1,14 @@
+{
+  "title": "SGBD MCQ Practice",
+  "description": "Static multiple-choice practice platform for SGBD and PL/SQL database exam questions.",
+  "author": "FiredMosquito831",
+  "links": {
+    "youtube": "https://www.youtube.com/",
+    "github": "https://github.com/FiredMosquito831/SGBD-prep-and-site-an2-sem2",
+    "website": "https://firedmosquito831.github.io/SGBD-prep-and-site-an2-sem2/"
+  },
+  "branding": {
+    "primaryColor": "blue",
+    "logo": null
+  }
+}
