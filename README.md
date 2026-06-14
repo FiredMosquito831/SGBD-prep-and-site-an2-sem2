@@ -24,14 +24,14 @@ https://firedmosquito831.github.io/SGBD-prep-and-site-an2-sem2/
 - `data/config.json`: active set registry and UI metadata.
 - `data/website.json`: startup metadata required by the current app shell.
 - `sets/sgbd_uploaded_master.json`: current/default SGBD question set.
-- `sets_en/sgbd_uploaded_master.json`: English mirror. The source set is already English, so this currently matches `sets/`.
+- `sets_en/sgbd_uploaded_master.json`: current mirror. This currently matches `sets/` until the final bilingual split is prepared.
 
 ## Current Set
 
 Source:
 
 ```text
-C:\Users\fgghk\Downloads\SGBD_UPLOADED_SETS_FIXED_ENGLISH_PACK\SGBD_UPLOADED_SETS_FIXED_ENGLISH\03_TRANSLATED_DEDUPED_MASTER\sgbd_uploaded_fixed_deduplicated_master_plain_en.json
+C:\Users\fgghk\Downloads\SGBD_UPLOADED_SETS_FIXED_PACK\SGBD_UPLOADED_SETS_FIXED\03_FIXED_DEDUPED_MASTER\sgbd_uploaded_fixed_deduplicated_master_plain.json
 ```
 
 Count:
@@ -40,7 +40,7 @@ Count:
 - 96 single-correct questions
 - 72 multi-correct questions
 
-The source is already English. The current first version mirrors the same JSON in both `sets/` and `sets_en/`, and the app defaults to English.
+The current version mirrors the same fixed source JSON in both `sets/` and `sets_en/` until the final bilingual split is prepared.
 
 ## Run Locally
 
