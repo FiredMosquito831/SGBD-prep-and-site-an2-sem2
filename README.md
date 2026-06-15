@@ -25,6 +25,10 @@ https://firedmosquito831.github.io/SGBD-prep-and-site-an2-sem2/
 - `data/website.json`: startup metadata required by the current app shell.
 - `sets/sgbd_uploaded_master.json`: current/default SGBD question set.
 - `sets_en/sgbd_uploaded_master.json`: current mirror. This currently matches `sets/` until the final bilingual split is prepared.
+- `sets/diaconita_1.json`: Diaconita 1 compact set.
+- `sets_en/diaconita_1.json`: mirror for Diaconita 1.
+- `sets/diaconita_2.json`: Diaconita 2 compact set.
+- `sets_en/diaconita_2.json`: mirror for Diaconita 2.
 
 ## Current Set
 
@@ -37,6 +41,8 @@ C:\Users\fgghk\Downloads\SGBD_UPLOADED_SETS_FIXED_PACK\SGBD_UPLOADED_SETS_FIXED\
 Count:
 
 - `sgbd_uploaded_master`: 168 questions
+- `diaconita_1`: 39 questions
+- `diaconita_2`: 77 questions
 - 96 single-correct questions
 - 72 multi-correct questions
 
@@ -60,12 +66,12 @@ Opening `index.html` directly can fail in some browsers because the app loads JS
 
 ## Update The Set
 
-1. Replace `sets/sgbd_uploaded_master.json`.
-2. Replace `sets_en/sgbd_uploaded_master.json`.
-3. Update `data/config.json` if the count or file name changes.
+1. Replace the target file under `sets/`.
+2. Replace the mirror under `sets_en/`.
+3. Update `data/config.json` if the count, file name, or display order changes.
 4. Bump `APP_DATA_VERSION` in `index.html` and `answers.html`.
 5. Validate JSON before deploying.
 
 ## Deploy
 
-This repo uses `.github/workflows/pages.yml` to publish the repository root to GitHub Pages on every push to `main`.
+The standalone GitHub repo uses `.github/workflows/pages.yml` to publish the repository root to GitHub Pages on every push to `main`.

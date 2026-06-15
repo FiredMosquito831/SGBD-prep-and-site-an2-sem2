@@ -2,7 +2,9 @@
   "title": "SGBD MCQ Practice",
   "subtitle": "PL/SQL Databases",
   "displayOrder": [
-    "sgbd_uploaded_master"
+    "sgbd_uploaded_master",
+    "diaconita_1",
+    "diaconita_2"
   ],
   "defaultSet": "sgbd_uploaded_master",
   "links": {
@@ -25,6 +27,40 @@
         "all"
       ],
       "defaultCount": 30
+    },
+    "diaconita_1": {
+      "id": "diaconita_1",
+      "displayName": "Diaconita 1",
+      "shortName": "D1",
+      "icon": "ph-stack",
+      "colorClass": "emerald",
+      "dataFile": "sets/diaconita_1.json",
+      "englishDataFile": "sets_en/diaconita_1.json",
+      "chapters": null,
+      "presets": [
+        10,
+        20,
+        30,
+        "all"
+      ],
+      "defaultCount": 20
+    },
+    "diaconita_2": {
+      "id": "diaconita_2",
+      "displayName": "Diaconita 2",
+      "shortName": "D2",
+      "icon": "ph-files",
+      "colorClass": "amber",
+      "dataFile": "sets/diaconita_2.json",
+      "englishDataFile": "sets_en/diaconita_2.json",
+      "chapters": null,
+      "presets": [
+        20,
+        40,
+        60,
+        "all"
+      ],
+      "defaultCount": 20
     }
   }
 }
