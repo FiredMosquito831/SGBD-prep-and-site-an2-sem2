@@ -1,0 +1,639 @@
+[
+  {
+    "id": 1,
+    "question": "What will be the effect of the following block if no row exists for employee_id = 1000?\n\nCode:\nSET SERVEROUTPUT ON\nBEGIN\n  UPDATE employees\n  SET salary = salary + 100\n  WHERE employee_id = 1000;\n  DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT);\nEND;",
+    "answers": [
+      {
+        "text": "Displays nothing and continues execution without errors.",
+        "isCorrect": false
+      },
+      {
+        "text": "Displays NULL because no rows are affected.",
+        "isCorrect": false
+      },
+      {
+        "text": "Displays 0 and the block ends normally.",
+        "isCorrect": true
+      },
+      {
+        "text": "Raises the predefined NO_DATA_FOUND exception.",
+        "isCorrect": false
+      },
+      {
+        "text": "Raises the TOO_MANY_ROWS exception.",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 2,
+    "question": "What does the following PL/SQL block display? The departments table exists and is populated.\n\nCode:\nSET SERVEROUTPUT ON\nDECLARE\n  x VARCHAR2(10);\n  CURSOR c IS SELECT department_id FROM departments WHERE ROWNUM <= 1;\n  v_id departments.department_id%TYPE;\nBEGIN\n  OPEN c;\n  FETCH c INTO v_id;\n  IF c%FOUND THEN\n    DBMS_OUTPUT.PUT_LINE('X');\n  END IF;\n  DBMS_OUTPUT.PUT_LINE('Z');\n  CLOSE c;\nEXCEPTION\n  WHEN OTHERS THEN\n    DBMS_OUTPUT.PUT_LINE('Y');\nEND;",
+    "answers": [
+      {
+        "text": "Y",
+        "isCorrect": false
+      },
+      {
+        "text": "Nothing",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile",
+        "isCorrect": false
+      },
+      {
+        "text": "X and Z",
+        "isCorrect": true
+      },
+      {
+        "text": "Y and Z",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Global variables declared in a package specification:",
+    "answers": [
+      {
+        "text": "Persist for all sessions simultaneously.",
+        "isCorrect": false
+      },
+      {
+        "text": "Are visible only in the package body.",
+        "isCorrect": false
+      },
+      {
+        "text": "Cannot be initialized in the declaration.",
+        "isCorrect": false
+      },
+      {
+        "text": "Persist for the duration of the current session and can store state between calls to any subprogram in the package.",
+        "isCorrect": true
+      },
+      {
+        "text": "Are created at log-on and destroyed at commit.",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 4,
+    "question": "What will the following PL/SQL block display? The employees table exists and contains all three employees.\n\nCode:\nSET SERVEROUTPUT ON\nDECLARE\n  TYPE t_ids IS TABLE OF employees.employee_id%TYPE;\n  v_ids t_ids := t_ids(101,102,103);\nBEGIN\n  FORALL i IN v_ids.FIRST .. v_ids.LAST\n    UPDATE employees\n    SET salary = salary + 50\n    WHERE employee_id = v_ids(i);\n  DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT);\nEND;",
+    "answers": [
+      {
+        "text": "Raises VALUE_ERROR exception",
+        "isCorrect": false
+      },
+      {
+        "text": "3",
+        "isCorrect": true
+      },
+      {
+        "text": "NULL",
+        "isCorrect": false
+      },
+      {
+        "text": "1",
+        "isCorrect": false
+      },
+      {
+        "text": "Raises INVALID_CURSOR exception",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Using the FORALL clause instead of a classic FOR loop is recommended for:",
+    "answers": [
+      {
+        "text": "Improving code readability.",
+        "isCorrect": false
+      },
+      {
+        "text": "Enabling asynchronous commit.",
+        "isCorrect": false
+      },
+      {
+        "text": "Explicit support for VARRAY type collections.",
+        "isCorrect": false
+      },
+      {
+        "text": "Reducing the number of context switches between the PL/SQL engine and the SQL engine.",
+        "isCorrect": true
+      },
+      {
+        "text": "Allowing the use of GOTO inside DML statements.",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 6,
+    "question": "A trigger that does not contain the FOR EACH ROW clause executes:",
+    "answers": [
+      {
+        "text": "Only on COMMIT command.",
+        "isCorrect": false
+      },
+      {
+        "text": "Once for the DML statement, regardless of the number of affected rows.",
+        "isCorrect": true
+      },
+      {
+        "text": "Only if the statement affects at least one row.",
+        "isCorrect": false
+      },
+      {
+        "text": "Twice (before and after) for each row.",
+        "isCorrect": false
+      },
+      {
+        "text": "Once for each modified row.",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Consider the PL/SQL block. The table exists and has rows. What will the block display?\n\nCode:\nSET SERVEROUTPUT ON\nDECLARE\n  CURSOR c IS SELECT department_id FROM departments;\n  v_id departments.department_id%TYPE;\nBEGIN\n  OPEN c;\n  DBMS_OUTPUT.PUT_LINE(c%ROWCOUNT);\n  FETCH c INTO v_id;\n  CLOSE c;\nEND;",
+    "answers": [
+      {
+        "text": "1",
+        "isCorrect": false
+      },
+      {
+        "text": "NULL",
+        "isCorrect": false
+      },
+      {
+        "text": "0",
+        "isCorrect": true
+      },
+      {
+        "text": "Raises INVALID_CURSOR exception",
+        "isCorrect": false
+      },
+      {
+        "text": "2",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Which PL/SQL loop automatically handles OPEN, FETCH, and CLOSE operations for an explicit cursor?",
+    "answers": [
+      {
+        "text": "FOR i IN 1..SQL%ROWCOUNT LOOP ... END LOOP",
+        "isCorrect": false
+      },
+      {
+        "text": "GOTO c%ROWCOUNT",
+        "isCorrect": false
+      },
+      {
+        "text": "WHILE ... LOOP ... END LOOP",
+        "isCorrect": false
+      },
+      {
+        "text": "LOOP ... EXIT WHEN ... END LOOP",
+        "isCorrect": false
+      },
+      {
+        "text": "FOR r IN c LOOP ... END LOOP",
+        "isCorrect": true
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Select the true statement about a VARRAY:",
+    "answers": [
+      {
+        "text": "It is always a sparse collection.",
+        "isCorrect": false
+      },
+      {
+        "text": "It can contain a variable number of elements, but does not exceed a maximum size fixed at definition.",
+        "isCorrect": true
+      },
+      {
+        "text": "DELETE[n] can remove a single element.",
+        "isCorrect": false
+      },
+      {
+        "text": "The index can have negative values.",
+        "isCorrect": false
+      },
+      {
+        "text": "It cannot be passed as a parameter to a subprogram.",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Which combination is valid regarding the existence of specification and/or body?",
+    "answers": [
+      {
+        "text": "Package with body but without specification – only for private local procedures.",
+        "isCorrect": false
+      },
+      {
+        "text": "If the specification is missing, the body automatically becomes public.",
+        "isCorrect": false
+      },
+      {
+        "text": "If the specification is missing, the body will not compile.",
+        "isCorrect": true
+      },
+      {
+        "text": "Package with only specification (no body) – possible when no implementation is needed; package with only body – allowed, but objects remain private.",
+        "isCorrect": false
+      },
+      {
+        "text": "Both parts are always mandatory.",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 11,
+    "question": "Inside a trigger, the test IF INSERTING THEN ... is available:",
+    "answers": [
+      {
+        "text": "In any trigger (row or statement) to distinguish the DML event that triggered it.",
+        "isCorrect": true
+      },
+      {
+        "text": "Only in BEFORE statement triggers.",
+        "isCorrect": false
+      },
+      {
+        "text": "Only in compound triggers.",
+        "isCorrect": false
+      },
+      {
+        "text": "Only in AFTER triggers.",
+        "isCorrect": false
+      },
+      {
+        "text": "In any PL/SQL block.",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 12,
+    "question": "What will the following block display?\n\nCode:\nSET SERVEROUTPUT ON\nBEGIN\n  UPDATE employees\n  SET salary = salary + 10\n  WHERE department_id = 30;\n  IF SQL%ISOPEN THEN\n    DBMS_OUTPUT.PUT_LINE('Is opened');\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('Is not opened');\n  END IF;\nEND;",
+    "answers": [
+      {
+        "text": "Raises INVALID_CURSOR exception",
+        "isCorrect": false
+      },
+      {
+        "text": "Compilation error",
+        "isCorrect": false
+      },
+      {
+        "text": "NULL",
+        "isCorrect": false
+      },
+      {
+        "text": "Is not opened",
+        "isCorrect": true
+      },
+      {
+        "text": "Is opened",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 13,
+    "question": "A \"context switch\" occurs when:",
+    "answers": [
+      {
+        "text": "The DBMS_OUTPUT.PUT_LINE procedure is called",
+        "isCorrect": false
+      },
+      {
+        "text": "The TRIM method is used on a collection",
+        "isCorrect": false
+      },
+      {
+        "text": "Entering an IF ... THEN branch",
+        "isCorrect": false
+      },
+      {
+        "text": "An unexpected exception is raised",
+        "isCorrect": false
+      },
+      {
+        "text": "The PL/SQL engine executes an SQL statement and transfers it to the SQL engine",
+        "isCorrect": true
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 14,
+    "question": "The FIRST and LAST methods on a collection return:",
+    "answers": [
+      {
+        "text": "The maximum declared size.",
+        "isCorrect": false
+      },
+      {
+        "text": "The values of the first and last elements.",
+        "isCorrect": false
+      },
+      {
+        "text": "The total number of elements.",
+        "isCorrect": false
+      },
+      {
+        "text": "A boolean value indicating whether the list is empty.",
+        "isCorrect": false
+      },
+      {
+        "text": "The first and last defined index in the collection.",
+        "isCorrect": true
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 15,
+    "question": "What will the following block display if no rows exist with DEPARTMENT_ID = 999?\n\nCode:\nSET SERVEROUTPUT ON\nBEGIN\n  DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT);\n  UPDATE employees\n  SET salary = salary + 100\n  WHERE department_id = 999;\nEND;",
+    "answers": [
+      {
+        "text": "0",
+        "isCorrect": false
+      },
+      {
+        "text": "1",
+        "isCorrect": false
+      },
+      {
+        "text": "NULL",
+        "isCorrect": true
+      },
+      {
+        "text": "TRUE",
+        "isCorrect": false
+      },
+      {
+        "text": "raises NO_DATA_FOUND exception",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu1",
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 16,
+    "question": "What will the collection block display after filling a table with 1..10, deleting selected elements, printing with NVL(t(i),0), then DELETE-ing the collection?",
+    "answers": [
+      {
+        "text": "Displays: Table has 10 elements: 1 2 3 4 5 6 7 8 9 10; Table has 10 elements: 0 2 0 4 0 6 0 8 0 10; Table has 0 elements",
+        "isCorrect": true
+      },
+      {
+        "text": "It displays ORA-06531: Reference to uninitialized collection",
+        "isCorrect": false
+      },
+      {
+        "text": "Displays: Table has 10 elements: 1 2 3 4 5 6 7 8 9 10; Table has 5 elements: 0 2 0 4 0 6 0 8 0 10; Table has 0 elements",
+        "isCorrect": false
+      },
+      {
+        "text": "Executes but does not display anything",
+        "isCorrect": false
+      },
+      {
+        "text": "Displays: Table has 10 elements: 1 2 3 4 5 6 7 8 9 10; Table has 10 elements: 1 2 3 4 5 6 7 8 9 10; Table has 0 elements",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 17,
+    "question": "What happens if a lock cannot be obtained due to the WAIT 5 option timing out?\n\nCode:\nSET SERVEROUTPUT ON\nDECLARE\n  CURSOR c IS SELECT * FROM product_information\n  WHERE product_id NOT IN (SELECT product_id FROM order_items)\n  FOR UPDATE OF list_price, min_price WAIT 5;\nBEGIN\n  FOR r IN c LOOP\n    UPDATE product_information\n    SET list_price = 0.95 * list_price, min_price = 0.95 * min_price\n    WHERE CURRENT OF c;\n  END LOOP;\n  ROLLBACK;\nEXCEPTION WHEN NO_DATA_FOUND THEN NULL;\nEND;",
+    "answers": [
+      {
+        "text": "Retries the operation until it succeeds.",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile",
+        "isCorrect": false
+      },
+      {
+        "text": "Skips the error and commits the rest of the transaction.",
+        "isCorrect": false
+      },
+      {
+        "text": "Continues to the next record without making any changes.",
+        "isCorrect": false
+      },
+      {
+        "text": "Throws a NO_WAIT exception and stops execution.",
+        "isCorrect": true
+      }
+    ],
+    "source_sets": [
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 18,
+    "question": "What does the FOR UPDATE clause in the cursor declaration ensure?\n\nCode:\nSET SERVEROUTPUT ON\nDECLARE\n  CURSOR c IS SELECT * FROM product_information\n  WHERE product_id NOT IN (SELECT product_id FROM order_items)\n  FOR UPDATE OF list_price, min_price WAIT 5;\nBEGIN\n  FOR r IN c LOOP\n    UPDATE product_information\n    SET list_price = 0.95 * list_price, min_price = 0.95 * min_price\n    WHERE CURRENT OF c;\n  END LOOP;\n  ROLLBACK;\nEXCEPTION WHEN NO_DATA_FOUND THEN NULL;\nEND;",
+    "answers": [
+      {
+        "text": "Automatically commits any updates made within the loop.",
+        "isCorrect": false
+      },
+      {
+        "text": "Locks the selected rows to prevent other sessions from updating them simultaneously.",
+        "isCorrect": true
+      },
+      {
+        "text": "Selects products that need to update their prices by increasing them.",
+        "isCorrect": false
+      },
+      {
+        "text": "Updates the database schema to reflect new price rules.",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 19,
+    "question": "What does the following PL/SQL block do?\n\nCode:\nSET SERVEROUTPUT ON\nDECLARE\n  TYPE tab_ind IS VARRAY(10000) OF employees%ROWTYPE;\n  t tab_ind;\nBEGIN\n  SELECT * BULK COLLECT INTO t FROM employees WHERE ROWNUM <= 50 ORDER BY salary DESC;\n  DBMS_OUTPUT.PUT_LINE('Number of elements ' || t.COUNT);\n  FOR i IN t.FIRST .. t.LAST LOOP\n    DBMS_OUTPUT.PUT_LINE(t(i).first_name || ' ' || t(i).last_name || '->' || i);\n  END LOOP;\nEND;",
+    "answers": [
+      {
+        "text": "It collects all employees into a collection and prints their first and last names.",
+        "isCorrect": false
+      },
+      {
+        "text": "Declares an index by table",
+        "isCorrect": false
+      },
+      {
+        "text": "It collects the first 50 employees ordered by salary descending into a collection and prints their first and last names.",
+        "isCorrect": true
+      },
+      {
+        "text": "It prints the first and last names of all employees without any specific order.",
+        "isCorrect": false
+      },
+      {
+        "text": "It collects the first 10000 employees ordered by salary descending into a collection and prints their first and last names.",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 20,
+    "question": "What is the purpose of the DECLARE keyword in PL/SQL?",
+    "answers": [
+      {
+        "text": "To define variables and data types",
+        "isCorrect": true
+      },
+      {
+        "text": "It is mandatory for all PL/SQL blocks",
+        "isCorrect": false
+      },
+      {
+        "text": "To create a new table",
+        "isCorrect": false
+      },
+      {
+        "text": "To begin a transaction",
+        "isCorrect": false
+      },
+      {
+        "text": "To execute a SQL query",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 21,
+    "question": "I want the default point (\"punctul din oficiu\"). I declare that I have solved the problems exclusively by myself and that I have not shared my code or my quiz answers.",
+    "answers": [
+      {
+        "text": "YES",
+        "isCorrect": true
+      },
+      {
+        "text": "NO",
+        "isCorrect": false
+      }
+    ],
+    "source_sets": [
+      "Sisu2"
+    ]
+  },
+  {
+    "id": 22,
+    "question": "What does the PL/SQL block output if there are employees earning more than 5000?\n\nCode:\nDECLARE\n  CURSOR c IS SELECT * FROM employees WHERE salary > 5000;\n  r c%ROWTYPE;\nBEGIN\n  OPEN c;\n  FETCH c INTO r;\n  CLOSE c;\n  IF NOT c%FOUND THEN\n    DBMS_OUTPUT.PUT_LINE('No rows found');\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('Rows found');\n  END IF;\nEND;",
+    "answers": [
+      {
+        "text": "No rows found",
+        "isCorrect": false
+      },
+      {
+        "text": "A compilation error",
+        "isCorrect": false
+      },
+      {
+        "text": "Rows found",
+        "isCorrect": false
+      },
+      {
+        "text": "The count of rows fetched",
+        "isCorrect": false
+      },
+      {
+        "text": "An invalid cursor exception",
+        "isCorrect": true
+      }
+    ],
+    "source_sets": [
+      "Sisu2"
+    ]
+  }
+]

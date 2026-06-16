@@ -4,7 +4,8 @@
   "displayOrder": [
     "sgbd_uploaded_master",
     "diaconita_1",
-    "diaconita_2"
+    "diaconita_2",
+    "diaconita_dedupped"
   ],
   "defaultSet": "sgbd_uploaded_master",
   "links": {
@@ -61,6 +62,22 @@
         "all"
       ],
       "defaultCount": 20
+    },
+    "diaconita_dedupped": {
+      "id": "diaconita_dedupped",
+      "displayName": "Diaconita Dedupped",
+      "shortName": "DD",
+      "icon": "ph-copy",
+      "colorClass": "violet",
+      "dataFile": "sets/diaconita_dedupped.json",
+      "englishDataFile": "sets_en/diaconita_dedupped.json",
+      "chapters": null,
+      "presets": [
+        10,
+        20,
+        "all"
+      ],
+      "defaultCount": 10
     }
   }
 }

@@ -29,6 +29,8 @@ https://firedmosquito831.github.io/SGBD-prep-and-site-an2-sem2/
 - `sets_en/diaconita_1.json`: mirror for Diaconita 1.
 - `sets/diaconita_2.json`: Diaconita 2 compact set.
 - `sets_en/diaconita_2.json`: mirror for Diaconita 2.
+- `sets/diaconita_dedupped.json`: Diaconita dedupped compact set.
+- `sets_en/diaconita_dedupped.json`: mirror for the dedupped set.
 
 ## Current Set
 
@@ -43,6 +45,7 @@ Count:
 - `sgbd_uploaded_master`: 168 questions
 - `diaconita_1`: 39 questions
 - `diaconita_2`: 77 questions
+- `diaconita_dedupped`: 22 questions
 - 96 single-correct questions
 - 72 multi-correct questions
 
