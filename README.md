@@ -2,7 +2,7 @@
 
 Static MCQ website for SGBD / PL SQL database practice.
 
-This folder is a copy of the latest Data Structures MCQ website shell, stripped down to one active SGBD question set.
+This folder is a copy of the latest Data Structures MCQ website shell, adapted for SGBD / PL SQL practice and materials.
 
 GitHub repo:
 
@@ -20,7 +20,8 @@ https://firedmosquito831.github.io/SGBD-prep-and-site-an2-sem2/
 
 - `index.html`: main quiz app.
 - `answers.html`: correct-answer search page.
-- `materials.html`: placeholder materials page for future PDFs or notes.
+- `materials.html`: curated materials page with ordered PDF study resources and usage guidance.
+- `materials/`: downloadable SGBD / PL SQL study PDFs exposed on `materials.html`.
 - `data/config.json`: active set registry and UI metadata.
 - `data/website.json`: startup metadata required by the current app shell.
 - `sets/sgbd_uploaded_master.json`: current/default SGBD question set.
@@ -50,6 +51,23 @@ Count:
 - 72 multi-correct questions
 
 The current version mirrors the same fixed source JSON in both `sets/` and `sets_en/` until the final bilingual split is prepared.
+
+## Materials Library
+
+The study materials page is intentionally ordered by prep value:
+
+1. `materials/plsql-mcq-theory-synthesis.pdf`
+   - Fastest exam-oriented theory compression. Best first read for MCQ prep.
+2. `materials/courses-1-8.pdf`
+   - Full course backbone and formal source coverage.
+3. `materials/plsql-cheatsheet-1-9.pdf`
+   - Condensed structured reference across courses and seminars.
+4. `materials/seminars-1-9-organized.pdf`
+   - Reorganized seminar walkthrough for application-focused understanding.
+5. `materials/ex-practice-set.pdf`
+   - Graduated exercise pack from easier tasks to harder PL/SQL work.
+6. `materials/all-practice.pdf`
+   - Short supplemental practice sheet for quick implementation reps.
 
 ## Run Locally
 
