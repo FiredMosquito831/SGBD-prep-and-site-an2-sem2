@@ -6,8 +6,9 @@ This folder is a copy of the latest Data Structures MCQ website shell, adapted f
 
 GitHub repo:
 
+https://firedmosquito831.github.io/SGBD-prep-and-site-an2-sem2/
 ```text
-https://github.com/FiredMosquito831/SGBD-prep-and-site-an2-sem2
+(https://github.com/FiredMosquito831/SGBD-prep-and-site-an2-sem2)
 ```
 
 GitHub Pages URL:
