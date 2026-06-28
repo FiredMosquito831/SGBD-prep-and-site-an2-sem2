@@ -1,0 +1,1302 @@
+[
+  {
+    "id": 1,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_products with the columns product_id, product_name, price. It contains exactly one row with product_id=5, product_name='Mouse', and price=80.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  r q19_products%ROWTYPE;\nBEGIN\n  SELECT * INTO r\n  FROM q19_products\n  WHERE product_id = 5;\n\n  r.price := r.price + 20;\n\n  UPDATE q19_products\n  SET price = r.price\n  WHERE product_id = r.product_id;\n\n  DBMS_OUTPUT.PUT_LINE(r.product_name || ':' || SQL%ROWCOUNT || ':' || r.price);\nEND;\n/",
+    "answers": [
+      {
+        "text": "Mouse:1:80",
+        "isCorrect": false
+      },
+      {
+        "text": "Mouse:1:100",
+        "isCorrect": true
+      },
+      {
+        "text": "Mouse:0:100",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      },
+      {
+        "text": "product_name:1:100",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_orders with the columns order_id, customer_id, status. It contains exactly three rows: one row has status='NEW', and two rows have status='DONE'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_count NUMBER;\nBEGIN\n  SELECT COUNT(*) INTO v_count\n  FROM q19_orders\n  WHERE status = 'CANCELLED';\n\n  DBMS_OUTPUT.PUT_LINE(v_count || ':' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "0:0",
+        "isCorrect": false
+      },
+      {
+        "text": "0:1",
+        "isCorrect": true
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      },
+      {
+        "text": "1:0",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_students with the columns student_id, student_name, grade. It contains exactly three rows: student_id=1 has grade 10, student_id=2 has grade 5, and student_id=3 has grade 4.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_grade NUMBER;\nBEGIN\n  SELECT grade INTO v_grade\n  FROM q19_students\n  WHERE student_id = 4;\n\n  IF v_grade >= 5 THEN\n    DBMS_OUTPUT.PUT_LINE('PASS');\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('FAIL');\n  END IF;\n\nEXCEPTION\n  WHEN NO_DATA_FOUND THEN\n    UPDATE q19_students\n    SET grade = grade + 1\n    WHERE grade < 5;\n\n    DBMS_OUTPUT.PUT_LINE('NOT FOUND:' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "PASS",
+        "isCorrect": false
+      },
+      {
+        "text": "FAIL",
+        "isCorrect": false
+      },
+      {
+        "text": "NOT FOUND:0",
+        "isCorrect": false
+      },
+      {
+        "text": "NOT FOUND:1",
+        "isCorrect": true
+      },
+      {
+        "text": "The block raises TOO_MANY_ROWS.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_employees with the columns employee_id, first_name, salary. It contains exactly three rows: two employees have salary=3000, and one employee has salary=5000.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_salary NUMBER;\nBEGIN\n  SELECT salary INTO v_salary\n  FROM q19_employees\n  WHERE salary = 3000;\n\n  DBMS_OUTPUT.PUT_LINE('SALARY:' || v_salary);\n\nEXCEPTION\n  WHEN TOO_MANY_ROWS THEN\n    DBMS_OUTPUT.PUT_LINE('TOO MANY');\nEND;\n/",
+    "answers": [
+      {
+        "text": "SALARY:3000",
+        "isCorrect": false
+      },
+      {
+        "text": "SALARY:5000",
+        "isCorrect": false
+      },
+      {
+        "text": "TOO MANY",
+        "isCorrect": true
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_tickets with the columns ticket_id, priority, status. It contains exactly three rows: two rows have status='OPEN', and one row has status='CLOSED'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  CURSOR c IS\n    SELECT ticket_id\n    FROM q19_tickets\n    WHERE status = 'OPEN';\n\n  v_id q19_tickets.ticket_id%TYPE;\nBEGIN\n  OPEN c;\n\n  DBMS_OUTPUT.PUT_LINE(c%ROWCOUNT);\n\n  FETCH c INTO v_id;\n  DBMS_OUTPUT.PUT_LINE(c%ROWCOUNT);\n\n  FETCH c INTO v_id;\n  DBMS_OUTPUT.PUT_LINE(c%ROWCOUNT);\n\n  CLOSE c;\nEND;\n/",
+    "answers": [
+      {
+        "text": "0 1 2",
+        "isCorrect": true
+      },
+      {
+        "text": "1 2 3",
+        "isCorrect": false
+      },
+      {
+        "text": "NULL 1 2",
+        "isCorrect": false
+      },
+      {
+        "text": "0 0 0",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises INVALID_CURSOR.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_invoices with the columns invoice_id, amount, paid_flag. It contains exactly three rows: two rows have paid_flag='N', and one row has paid_flag='Y'.\n\nWhat will this block display?\n\nCode:\nBEGIN\n  UPDATE q19_invoices\n  SET paid_flag = 'Y'\n  WHERE paid_flag = 'X';\n\n  IF SQL%FOUND THEN\n    DBMS_OUTPUT.PUT_LINE('UPDATED');\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('NOT UPDATED');\n  END IF;\n\n  DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "UPDATED\n0",
+        "isCorrect": false
+      },
+      {
+        "text": "NOT UPDATED\n0",
+        "isCorrect": true
+      },
+      {
+        "text": "NOT UPDATED\nNULL",
+        "isCorrect": false
+      },
+      {
+        "text": "UPDATED\n3",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_books with the columns book_id, title, stock. It contains exactly three rows: one row has stock=0, and two rows have stock greater than 0.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_count NUMBER;\nBEGIN\n  SELECT COUNT(*) INTO v_count\n  FROM q19_books\n  WHERE stock > 0;\n\n  DBMS_OUTPUT.PUT_LINE('COUNT=' || v_count);\n  DBMS_OUTPUT.PUT_LINE('ROWS=' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "COUNT=2\nROWS=2",
+        "isCorrect": false
+      },
+      {
+        "text": "COUNT=2\nROWS=1",
+        "isCorrect": true
+      },
+      {
+        "text": "COUNT=1\nROWS=2",
+        "isCorrect": false
+      },
+      {
+        "text": "COUNT=0\nROWS=1",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises TOO_MANY_ROWS.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_clients with the columns client_id, first_name, credit_limit. It contains exactly one row with client_id=10, first_name='Ada', and credit_limit=500.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_name q19_clients.first_name%TYPE;\nBEGIN\n  SELECT first_name INTO v_name\n  FROM q19_clients\n  WHERE client_id = 10;\n\n  DBMS_OUTPUT.PUT_LINE(v_name || ':' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "Ada:0",
+        "isCorrect": false
+      },
+      {
+        "text": "Ada:1",
+        "isCorrect": true
+      },
+      {
+        "text": "Ada:500",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_tasks with the columns task_id, task_name, status. It contains exactly three rows: two rows have status='DONE', and one row has status='OPEN'.\n\nWhat will this block display?\n\nCode:\nBEGIN\n  DELETE FROM q19_tasks\n  WHERE status = 'DONE';\n\n  DBMS_OUTPUT.PUT_LINE('Deleted:' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "Deleted:0",
+        "isCorrect": false
+      },
+      {
+        "text": "Deleted:1",
+        "isCorrect": false
+      },
+      {
+        "text": "Deleted:2",
+        "isCorrect": true
+      },
+      {
+        "text": "Deleted:3",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_messages with the columns message_id, message_text. It contains exactly two rows before the block runs.\n\nWhat will this block display?\n\nCode:\nBEGIN\n  INSERT INTO q19_messages(message_id, message_text)\n  VALUES (3, 'Hello');\n\n  DBMS_OUTPUT.PUT_LINE('Rows:' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "Rows:0",
+        "isCorrect": false
+      },
+      {
+        "text": "Rows:1",
+        "isCorrect": true
+      },
+      {
+        "text": "Rows:2",
+        "isCorrect": false
+      },
+      {
+        "text": "Rows:3",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises TOO_MANY_ROWS.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_accounts with the columns account_id, balance. It contains exactly three rows: balances are 100, 200, and 300.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_balance NUMBER;\nBEGIN\n  SELECT balance INTO v_balance\n  FROM q19_accounts\n  WHERE account_id = 99;\n\n  DBMS_OUTPUT.PUT_LINE(v_balance);\n\nEXCEPTION\n  WHEN NO_DATA_FOUND THEN\n    UPDATE q19_accounts\n    SET balance = balance + 10\n    WHERE balance >= 200;\n\n    DBMS_OUTPUT.PUT_LINE('Updated:' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "100",
+        "isCorrect": false
+      },
+      {
+        "text": "Updated:0",
+        "isCorrect": false
+      },
+      {
+        "text": "Updated:1",
+        "isCorrect": false
+      },
+      {
+        "text": "Updated:2",
+        "isCorrect": true
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_departments with the columns department_id, department_name. It contains exactly one row with department_id=1 and department_name='SALES'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  CURSOR c IS\n    SELECT department_name\n    FROM q19_departments\n    WHERE department_id = 1;\n\n  v_name q19_departments.department_name%TYPE;\nBEGIN\n  OPEN c;\n  FETCH c INTO v_name;\n\n  IF c%FOUND THEN\n    DBMS_OUTPUT.PUT_LINE(v_name || ':' || c%ROWCOUNT);\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('NONE');\n  END IF;\n\n  CLOSE c;\nEND;\n/",
+    "answers": [
+      {
+        "text": "NONE",
+        "isCorrect": false
+      },
+      {
+        "text": "SALES:0",
+        "isCorrect": false
+      },
+      {
+        "text": "SALES:1",
+        "isCorrect": true
+      },
+      {
+        "text": "SALES:2",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises INVALID_CURSOR.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_visits with the columns visit_id, patient_id. It contains exactly two rows.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  CURSOR c IS SELECT visit_id FROM q19_visits ORDER BY visit_id;\n  v_id q19_visits.visit_id%TYPE;\nBEGIN\n  OPEN c;\n\n  FETCH c INTO v_id;\n  FETCH c INTO v_id;\n  FETCH c INTO v_id;\n\n  IF c%NOTFOUND THEN\n    DBMS_OUTPUT.PUT_LINE('END:' || c%ROWCOUNT);\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('MORE:' || c%ROWCOUNT);\n  END IF;\n\n  CLOSE c;\nEND;\n/",
+    "answers": [
+      {
+        "text": "END:0",
+        "isCorrect": false
+      },
+      {
+        "text": "END:2",
+        "isCorrect": true
+      },
+      {
+        "text": "END:3",
+        "isCorrect": false
+      },
+      {
+        "text": "MORE:2",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_cars with the columns car_id, brand. It contains exactly one row.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  CURSOR c IS SELECT car_id FROM q19_cars;\n  v_id q19_cars.car_id%TYPE;\nBEGIN\n  OPEN c;\n  FETCH c INTO v_id;\n  CLOSE c;\n\n  DBMS_OUTPUT.PUT_LINE(c%ROWCOUNT);\n\nEXCEPTION\n  WHEN INVALID_CURSOR THEN\n    DBMS_OUTPUT.PUT_LINE('INVALID');\nEND;\n/",
+    "answers": [
+      {
+        "text": "0",
+        "isCorrect": false
+      },
+      {
+        "text": "1",
+        "isCorrect": false
+      },
+      {
+        "text": "INVALID",
+        "isCorrect": true
+      },
+      {
+        "text": "The block displays nothing.",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_animals with the columns animal_id, animal_name. It contains exactly one row.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  CURSOR c IS SELECT animal_id FROM q19_animals;\nBEGIN\n  OPEN c;\n  OPEN c;\n\n  DBMS_OUTPUT.PUT_LINE('DONE');\n\nEXCEPTION\n  WHEN CURSOR_ALREADY_OPEN THEN\n    DBMS_OUTPUT.PUT_LINE('ALREADY OPEN');\nEND;\n/",
+    "answers": [
+      {
+        "text": "DONE",
+        "isCorrect": false
+      },
+      {
+        "text": "ALREADY OPEN",
+        "isCorrect": true
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      },
+      {
+        "text": "1",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_logs with the columns log_id, log_text. It contains exactly two rows.\n\nWhat will this block display?\n\nCode:\nBEGIN\n  DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT);\n\n  UPDATE q19_logs\n  SET log_text = 'X'\n  WHERE log_id = -1;\nEND;\n/",
+    "answers": [
+      {
+        "text": "0",
+        "isCorrect": false
+      },
+      {
+        "text": "1",
+        "isCorrect": false
+      },
+      {
+        "text": "2",
+        "isCorrect": false
+      },
+      {
+        "text": "NULL",
+        "isCorrect": true
+      },
+      {
+        "text": "The block raises INVALID_CURSOR.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_scores with the columns player_id, score. It contains exactly three rows: scores are 10, 20, and 30.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_total NUMBER;\nBEGIN\n  SELECT SUM(score) INTO v_total\n  FROM q19_scores\n  WHERE score > 100;\n\n  IF v_total IS NULL THEN\n    DBMS_OUTPUT.PUT_LINE('NULL:' || SQL%ROWCOUNT);\n  ELSE\n    DBMS_OUTPUT.PUT_LINE(v_total || ':' || SQL%ROWCOUNT);\n  END IF;\nEND;\n/",
+    "answers": [
+      {
+        "text": "0:0",
+        "isCorrect": false
+      },
+      {
+        "text": "NULL:0",
+        "isCorrect": false
+      },
+      {
+        "text": "NULL:1",
+        "isCorrect": true
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises TOO_MANY_ROWS.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_salaries with the columns employee_id, salary. It contains exactly three rows with salaries 1000, 2000, and 3000.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_max NUMBER;\nBEGIN\n  SELECT MAX(salary) INTO v_max\n  FROM q19_salaries;\n\n  DBMS_OUTPUT.PUT_LINE(v_max || ':' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "3000:1",
+        "isCorrect": true
+      },
+      {
+        "text": "3000:3",
+        "isCorrect": false
+      },
+      {
+        "text": "1000:1",
+        "isCorrect": false
+      },
+      {
+        "text": "NULL:1",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises TOO_MANY_ROWS.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_rooms with the columns room_id, capacity. It contains exactly three rows: capacities are 10, 20, and 30.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_capacity NUMBER;\nBEGIN\n  SELECT capacity INTO v_capacity\n  FROM q19_rooms\n  WHERE room_id = 99;\n\n  DBMS_OUTPUT.PUT_LINE(v_capacity);\n\nEXCEPTION\n  WHEN NO_DATA_FOUND THEN\n    DELETE FROM q19_rooms\n    WHERE capacity < 25;\n\n    DBMS_OUTPUT.PUT_LINE('Deleted:' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "Deleted:0",
+        "isCorrect": false
+      },
+      {
+        "text": "Deleted:1",
+        "isCorrect": false
+      },
+      {
+        "text": "Deleted:2",
+        "isCorrect": true
+      },
+      {
+        "text": "Deleted:3",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises TOO_MANY_ROWS.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_movies with the columns movie_id, genre, rating. It contains exactly three rows: two rows have genre='DRAMA', and one row has genre='COMEDY'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_rating NUMBER;\nBEGIN\n  SELECT rating INTO v_rating\n  FROM q19_movies\n  WHERE genre = 'DRAMA';\n\n  DBMS_OUTPUT.PUT_LINE(v_rating);\n\nEXCEPTION\n  WHEN NO_DATA_FOUND THEN\n    DBMS_OUTPUT.PUT_LINE('NONE');\n  WHEN OTHERS THEN\n    DBMS_OUTPUT.PUT_LINE('OTHER');\nEND;\n/",
+    "answers": [
+      {
+        "text": "NONE",
+        "isCorrect": false
+      },
+      {
+        "text": "OTHER",
+        "isCorrect": true
+      },
+      {
+        "text": "The first DRAMA rating",
+        "isCorrect": false
+      },
+      {
+        "text": "The block displays nothing.",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_courses with the columns course_id, course_name, credits. It contains exactly three rows, and no row has credits greater than 10.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  CURSOR c IS\n    SELECT course_id\n    FROM q19_courses\n    WHERE credits > 10;\n\n  v_id q19_courses.course_id%TYPE;\nBEGIN\n  OPEN c;\n  FETCH c INTO v_id;\n\n  IF c%NOTFOUND THEN\n    DBMS_OUTPUT.PUT_LINE('NONE:' || c%ROWCOUNT);\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('FOUND:' || c%ROWCOUNT);\n  END IF;\n\n  CLOSE c;\nEND;\n/",
+    "answers": [
+      {
+        "text": "NONE:0",
+        "isCorrect": true
+      },
+      {
+        "text": "NONE:1",
+        "isCorrect": false
+      },
+      {
+        "text": "FOUND:0",
+        "isCorrect": false
+      },
+      {
+        "text": "FOUND:1",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_reservations with the columns reservation_id, status. It contains exactly three rows: two rows have status='ACTIVE', and one row has status='CANCELLED'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_counter NUMBER := 0;\nBEGIN\n  FOR r IN (\n    SELECT reservation_id\n    FROM q19_reservations\n    WHERE status = 'ACTIVE'\n  ) LOOP\n    v_counter := v_counter + 1;\n  END LOOP;\n\n  DBMS_OUTPUT.PUT_LINE('Looped:' || v_counter);\nEND;\n/",
+    "answers": [
+      {
+        "text": "Looped:0",
+        "isCorrect": false
+      },
+      {
+        "text": "Looped:1",
+        "isCorrect": false
+      },
+      {
+        "text": "Looped:2",
+        "isCorrect": true
+      },
+      {
+        "text": "Looped:3",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises INVALID_CURSOR.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_purchases with the columns purchase_id, amount. It contains exactly three rows with amounts 50, 150, and 250.\n\nWhat will this block display?\n\nCode:\nBEGIN\n  UPDATE q19_purchases\n  SET amount = amount * 2;\n\n  DBMS_OUTPUT.PUT_LINE('Rows:' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "Rows:0",
+        "isCorrect": false
+      },
+      {
+        "text": "Rows:1",
+        "isCorrect": false
+      },
+      {
+        "text": "Rows:2",
+        "isCorrect": false
+      },
+      {
+        "text": "Rows:3",
+        "isCorrect": true
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_alerts with the columns alert_id, severity. It contains exactly three rows: one row has severity='LOW', and two rows have severity='HIGH'.\n\nWhat will this block display?\n\nCode:\nBEGIN\n  DELETE FROM q19_alerts\n  WHERE severity = 'MEDIUM';\n\n  IF SQL%NOTFOUND THEN\n    DBMS_OUTPUT.PUT_LINE('NONE');\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('SOME');\n  END IF;\n\n  DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "NONE\n0",
+        "isCorrect": true
+      },
+      {
+        "text": "SOME\n0",
+        "isCorrect": false
+      },
+      {
+        "text": "NONE\n1",
+        "isCorrect": false
+      },
+      {
+        "text": "SOME\n2",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_archive with the columns item_id, archived_flag. It contains exactly three rows: two rows have archived_flag='N', and one row has archived_flag='Y'.\n\nWhat will this block display?\n\nCode:\nBEGIN\n  INSERT INTO q19_archive(item_id, archived_flag)\n  SELECT item_id + 100, 'Y'\n  FROM q19_archive\n  WHERE archived_flag = 'N';\n\n  DBMS_OUTPUT.PUT_LINE('Inserted:' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "Inserted:0",
+        "isCorrect": false
+      },
+      {
+        "text": "Inserted:1",
+        "isCorrect": false
+      },
+      {
+        "text": "Inserted:2",
+        "isCorrect": true
+      },
+      {
+        "text": "Inserted:3",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_wallets with the columns wallet_id, balance. It contains exactly three rows with balances 0, 50, and 100.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_count NUMBER;\nBEGIN\n  UPDATE q19_wallets\n  SET balance = balance + 10\n  WHERE balance = 0;\n\n  DBMS_OUTPUT.PUT_LINE('U=' || SQL%ROWCOUNT);\n\n  SELECT COUNT(*) INTO v_count\n  FROM q19_wallets\n  WHERE balance > 0;\n\n  DBMS_OUTPUT.PUT_LINE('C=' || v_count || ':' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "U=1\nC=2:1",
+        "isCorrect": false
+      },
+      {
+        "text": "U=1\nC=3:1",
+        "isCorrect": true
+      },
+      {
+        "text": "U=1\nC=3:3",
+        "isCorrect": false
+      },
+      {
+        "text": "U=0\nC=2:1",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises TOO_MANY_ROWS.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_shipments with the columns shipment_id, status. It contains exactly three rows: two rows have status='PENDING', and one row has status='SENT'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_status q19_shipments.status%TYPE;\nBEGIN\n  SELECT status INTO v_status\n  FROM q19_shipments\n  WHERE status = 'PENDING';\n\n  DBMS_OUTPUT.PUT_LINE(v_status);\n\nEXCEPTION\n  WHEN TOO_MANY_ROWS THEN\n    UPDATE q19_shipments\n    SET status = 'SENT'\n    WHERE status = 'PENDING';\n\n    DBMS_OUTPUT.PUT_LINE('Changed:' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "PENDING",
+        "isCorrect": false
+      },
+      {
+        "text": "Changed:0",
+        "isCorrect": false
+      },
+      {
+        "text": "Changed:1",
+        "isCorrect": false
+      },
+      {
+        "text": "Changed:2",
+        "isCorrect": true
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_devices with the columns device_id, active_flag. It contains exactly one row with active_flag='Y'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  CURSOR c IS SELECT device_id FROM q19_devices;\nBEGIN\n  OPEN c;\n\n  IF c%ISOPEN THEN\n    DBMS_OUTPUT.PUT_LINE('OPEN');\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('CLOSED');\n  END IF;\n\n  CLOSE c;\nEND;\n/",
+    "answers": [
+      {
+        "text": "OPEN",
+        "isCorrect": true
+      },
+      {
+        "text": "CLOSED",
+        "isCorrect": false
+      },
+      {
+        "text": "1",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises INVALID_CURSOR.",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_suppliers with the columns supplier_id, city. It contains exactly three rows.\n\nWhat will this block display?\n\nCode:\nBEGIN\n  UPDATE q19_suppliers\n  SET city = city;\n\n  IF SQL%ISOPEN THEN\n    DBMS_OUTPUT.PUT_LINE('OPEN');\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('NOT OPEN');\n  END IF;\nEND;\n/",
+    "answers": [
+      {
+        "text": "OPEN",
+        "isCorrect": false
+      },
+      {
+        "text": "NOT OPEN",
+        "isCorrect": true
+      },
+      {
+        "text": "3",
+        "isCorrect": false
+      },
+      {
+        "text": "NULL",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises INVALID_CURSOR.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_notes with the columns note_id, category. It contains exactly three rows: note_id=1 has category='A', note_id=2 has category='A', and note_id=3 has category='B'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  CURSOR c(p_cat VARCHAR2) IS\n    SELECT note_id\n    FROM q19_notes\n    WHERE category = p_cat;\n\n  v_id q19_notes.note_id%TYPE;\nBEGIN\n  OPEN c('B');\n  FETCH c INTO v_id;\n\n  DBMS_OUTPUT.PUT_LINE(v_id || ':' || c%ROWCOUNT);\n\n  CLOSE c;\nEND;\n/",
+    "answers": [
+      {
+        "text": "1:1",
+        "isCorrect": false
+      },
+      {
+        "text": "2:1",
+        "isCorrect": false
+      },
+      {
+        "text": "3:1",
+        "isCorrect": true
+      },
+      {
+        "text": "3:3",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises TOO_MANY_ROWS.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_flags with the columns flag_id, flag_value. It contains exactly one row with flag_id=1 and flag_value=NULL.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_value q19_flags.flag_value%TYPE;\nBEGIN\n  SELECT flag_value INTO v_value\n  FROM q19_flags\n  WHERE flag_value = NULL;\n\n  DBMS_OUTPUT.PUT_LINE('FOUND');\n\nEXCEPTION\n  WHEN NO_DATA_FOUND THEN\n    DBMS_OUTPUT.PUT_LINE('NOT FOUND');\nEND;\n/",
+    "answers": [
+      {
+        "text": "FOUND",
+        "isCorrect": false
+      },
+      {
+        "text": "NOT FOUND",
+        "isCorrect": true
+      },
+      {
+        "text": "NULL",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises TOO_MANY_ROWS.",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_flags2 with the columns flag_id, flag_value. It contains exactly one row with flag_id=1 and flag_value=NULL.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_value q19_flags2.flag_value%TYPE;\nBEGIN\n  SELECT flag_value INTO v_value\n  FROM q19_flags2\n  WHERE flag_value IS NULL;\n\n  IF v_value IS NULL THEN\n    DBMS_OUTPUT.PUT_LINE('IS NULL:' || SQL%ROWCOUNT);\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('NOT NULL');\n  END IF;\nEND;\n/",
+    "answers": [
+      {
+        "text": "IS NULL:0",
+        "isCorrect": false
+      },
+      {
+        "text": "IS NULL:1",
+        "isCorrect": true
+      },
+      {
+        "text": "NOT NULL",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_coupons with the columns coupon_id, discount. It contains exactly three rows with discounts 10, 20, and 30.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_avg NUMBER;\nBEGIN\n  SELECT AVG(discount) INTO v_avg\n  FROM q19_coupons\n  WHERE discount > 100;\n\n  DBMS_OUTPUT.PUT_LINE(NVL(v_avg, 0) || ':' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "0:0",
+        "isCorrect": false
+      },
+      {
+        "text": "0:1",
+        "isCorrect": true
+      },
+      {
+        "text": "NULL:1",
+        "isCorrect": false
+      },
+      {
+        "text": "20:3",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_trainers with the columns trainer_id, experience_years. It contains exactly three rows: two rows have experience_years=5, and one row has experience_years=10.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_years NUMBER;\nBEGIN\n  SELECT experience_years INTO v_years\n  FROM q19_trainers\n  WHERE experience_years IN (5, 10);\n\n  DBMS_OUTPUT.PUT_LINE(v_years);\n\nEXCEPTION\n  WHEN TOO_MANY_ROWS THEN\n    DBMS_OUTPUT.PUT_LINE('MANY');\nEND;\n/",
+    "answers": [
+      {
+        "text": "5",
+        "isCorrect": false
+      },
+      {
+        "text": "10",
+        "isCorrect": false
+      },
+      {
+        "text": "MANY",
+        "isCorrect": true
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_badges with the columns badge_id, level_name. It contains exactly three rows: one row has level_name='GOLD', and two rows have level_name='SILVER'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_level q19_badges.level_name%TYPE;\nBEGIN\n  BEGIN\n    SELECT level_name INTO v_level\n    FROM q19_badges\n    WHERE level_name = 'BRONZE';\n  EXCEPTION\n    WHEN NO_DATA_FOUND THEN\n      DBMS_OUTPUT.PUT_LINE('INNER');\n  END;\n\n  UPDATE q19_badges\n  SET level_name = 'GOLD'\n  WHERE level_name = 'SILVER';\n\n  DBMS_OUTPUT.PUT_LINE('OUTER:' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "INNER\nOUTER:0",
+        "isCorrect": false
+      },
+      {
+        "text": "INNER\nOUTER:1",
+        "isCorrect": false
+      },
+      {
+        "text": "INNER\nOUTER:2",
+        "isCorrect": true
+      },
+      {
+        "text": "OUTER:2",
+        "isCorrect": false
+      },
+      {
+        "text": "The block stops after INNER.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_points with the columns player_id, points. It contains exactly one row with player_id=7 and points=15.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_label VARCHAR2(10);\nBEGIN\n  SELECT CASE\n           WHEN points >= 20 THEN 'HIGH'\n           WHEN points >= 10 THEN 'MID'\n           ELSE 'LOW'\n         END\n  INTO v_label\n  FROM q19_points\n  WHERE player_id = 7;\n\n  DBMS_OUTPUT.PUT_LINE(v_label || ':' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "HIGH:1",
+        "isCorrect": false
+      },
+      {
+        "text": "MID:1",
+        "isCorrect": true
+      },
+      {
+        "text": "LOW:1",
+        "isCorrect": false
+      },
+      {
+        "text": "MID:15",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_queue with the columns queue_id, priority. It contains exactly two rows with queue_id values 1 and 2.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  CURSOR c IS SELECT queue_id FROM q19_queue ORDER BY queue_id;\n  v_id q19_queue.queue_id%TYPE;\nBEGIN\n  OPEN c;\n\n  LOOP\n    FETCH c INTO v_id;\n    DBMS_OUTPUT.PUT_LINE(v_id);\n    EXIT WHEN c%NOTFOUND;\n  END LOOP;\n\n  CLOSE c;\nEND;\n/",
+    "answers": [
+      {
+        "text": "1\n2",
+        "isCorrect": false
+      },
+      {
+        "text": "1\n2\n2",
+        "isCorrect": true
+      },
+      {
+        "text": "1\n1\n2",
+        "isCorrect": false
+      },
+      {
+        "text": "2\n1",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_queue2 with the columns queue_id, priority. It contains exactly two rows with queue_id values 1 and 2.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  CURSOR c IS SELECT queue_id FROM q19_queue2 ORDER BY queue_id;\n  v_id q19_queue2.queue_id%TYPE;\nBEGIN\n  OPEN c;\n\n  LOOP\n    FETCH c INTO v_id;\n    EXIT WHEN c%NOTFOUND;\n    DBMS_OUTPUT.PUT_LINE(v_id);\n  END LOOP;\n\n  CLOSE c;\nEND;\n/",
+    "answers": [
+      {
+        "text": "1\n2",
+        "isCorrect": true
+      },
+      {
+        "text": "1\n2\n2",
+        "isCorrect": false
+      },
+      {
+        "text": "1",
+        "isCorrect": false
+      },
+      {
+        "text": "2",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises INVALID_CURSOR.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_regions with the columns region_id, region_name. It contains exactly zero rows.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  CURSOR c IS SELECT region_id FROM q19_regions;\n  v_id q19_regions.region_id%TYPE;\nBEGIN\n  OPEN c;\n  DBMS_OUTPUT.PUT_LINE(c%ROWCOUNT);\n\n  FETCH c INTO v_id;\n  DBMS_OUTPUT.PUT_LINE(c%ROWCOUNT);\n\n  CLOSE c;\nEND;\n/",
+    "answers": [
+      {
+        "text": "0\n0",
+        "isCorrect": true
+      },
+      {
+        "text": "NULL\n0",
+        "isCorrect": false
+      },
+      {
+        "text": "0\n1",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises INVALID_CURSOR.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_locations with the columns location_id, city. It contains exactly one row with location_id=1 and city='Rome'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  r q19_locations%ROWTYPE;\nBEGIN\n  SELECT * INTO r\n  FROM q19_locations\n  WHERE location_id = 1;\n\n  DBMS_OUTPUT.PUT_LINE(r.city || ':' || r.location_id || ':' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "Rome:1:1",
+        "isCorrect": true
+      },
+      {
+        "text": "Rome:1:0",
+        "isCorrect": false
+      },
+      {
+        "text": "Rome:0:1",
+        "isCorrect": false
+      },
+      {
+        "text": "location_id:city:1",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_subscriptions with the columns subscription_id, status. It contains exactly three rows: one row has status='EXPIRED', and two rows have status='ACTIVE'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_count NUMBER;\nBEGIN\n  DELETE FROM q19_subscriptions\n  WHERE status = 'EXPIRED';\n\n  DBMS_OUTPUT.PUT_LINE('D=' || SQL%ROWCOUNT);\n\n  SELECT COUNT(*) INTO v_count\n  FROM q19_subscriptions;\n\n  DBMS_OUTPUT.PUT_LINE('C=' || v_count || ':' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "D=1\nC=2:1",
+        "isCorrect": true
+      },
+      {
+        "text": "D=1\nC=3:1",
+        "isCorrect": false
+      },
+      {
+        "text": "D=1\nC=2:2",
+        "isCorrect": false
+      },
+      {
+        "text": "D=0\nC=3:1",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_rentals with the columns rental_id, returned_flag. It contains exactly three rows: two rows have returned_flag='N', and one row has returned_flag='Y'.\n\nWhat will this block display?\n\nCode:\nBEGIN\n  UPDATE q19_rentals\n  SET returned_flag = 'Y'\n  WHERE returned_flag = 'N';\n\n  DBMS_OUTPUT.PUT_LINE(CASE\n                         WHEN SQL%FOUND THEN 'YES'\n                         ELSE 'NO'\n                       END || ':' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "YES:0",
+        "isCorrect": false
+      },
+      {
+        "text": "YES:2",
+        "isCorrect": true
+      },
+      {
+        "text": "NO:0",
+        "isCorrect": false
+      },
+      {
+        "text": "NO:2",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_tests with the columns test_id, result_score. It contains exactly three rows with scores 40, 60, and 80.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_score NUMBER;\nBEGIN\n  SELECT result_score INTO v_score\n  FROM q19_tests\n  WHERE result_score > 100;\n\n  DBMS_OUTPUT.PUT_LINE('SCORE');\n\nEXCEPTION\n  WHEN NO_DATA_FOUND THEN\n    DBMS_OUTPUT.PUT_LINE('NO SCORE');\n\n  WHEN TOO_MANY_ROWS THEN\n    DBMS_OUTPUT.PUT_LINE('MANY SCORES');\nEND;\n/",
+    "answers": [
+      {
+        "text": "SCORE",
+        "isCorrect": false
+      },
+      {
+        "text": "NO SCORE",
+        "isCorrect": true
+      },
+      {
+        "text": "MANY SCORES",
+        "isCorrect": false
+      },
+      {
+        "text": "The block displays 0.",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_grades with the columns student_id, grade. It contains exactly three rows with grades 4, 5, and 10.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_count NUMBER;\nBEGIN\n  SELECT COUNT(*) INTO v_count\n  FROM q19_grades\n  WHERE grade >= 5;\n\n  UPDATE q19_grades\n  SET grade = grade + 1\n  WHERE grade < 5;\n\n  DBMS_OUTPUT.PUT_LINE(v_count || ':' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "2:1",
+        "isCorrect": true
+      },
+      {
+        "text": "2:2",
+        "isCorrect": false
+      },
+      {
+        "text": "1:1",
+        "isCorrect": false
+      },
+      {
+        "text": "3:1",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_emails with the columns email_id, sent_flag. It contains exactly three rows: two rows have sent_flag='N', and one row has sent_flag='Y'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_count NUMBER;\nBEGIN\n  DELETE FROM q19_emails\n  WHERE sent_flag = 'Y';\n\n  SELECT COUNT(*) INTO v_count\n  FROM q19_emails\n  WHERE sent_flag = 'N';\n\n  DBMS_OUTPUT.PUT_LINE(v_count || ':' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "2:1",
+        "isCorrect": true
+      },
+      {
+        "text": "2:2",
+        "isCorrect": false
+      },
+      {
+        "text": "3:1",
+        "isCorrect": false
+      },
+      {
+        "text": "1:1",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises TOO_MANY_ROWS.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_payroll with the columns emp_id, salary. It contains exactly three rows: salaries are 1000, 2000, and 3000.\n\nWhat will this block display?\n\nCode:\nBEGIN\n  UPDATE q19_payroll\n  SET salary = salary + 100\n  WHERE salary = NULL;\n\n  DBMS_OUTPUT.PUT_LINE('Rows=' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "Rows=0",
+        "isCorrect": true
+      },
+      {
+        "text": "Rows=1",
+        "isCorrect": false
+      },
+      {
+        "text": "Rows=3",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_events with the columns event_id, event_type. It contains exactly three rows: one row has event_type='A', one has event_type='B', and one has event_type='C'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_type q19_events.event_type%TYPE;\nBEGIN\n  SELECT event_type INTO v_type\n  FROM q19_events\n  WHERE event_type IN ('A', 'B');\n\n  DBMS_OUTPUT.PUT_LINE(v_type);\n\nEXCEPTION\n  WHEN TOO_MANY_ROWS THEN\n    DBMS_OUTPUT.PUT_LINE('TOO MANY:' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "A",
+        "isCorrect": false
+      },
+      {
+        "text": "B",
+        "isCorrect": false
+      },
+      {
+        "text": "TOO MANY:1",
+        "isCorrect": false
+      },
+      {
+        "text": "TOO MANY:2",
+        "isCorrect": true
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_letters with the columns letter_id, letter_value. It contains exactly three rows with letter_value values 'A', 'B', and 'C'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  CURSOR c IS SELECT letter_value FROM q19_letters ORDER BY letter_value;\n  v_letter q19_letters.letter_value%TYPE;\nBEGIN\n  OPEN c;\n  FETCH c INTO v_letter;\n\n  DBMS_OUTPUT.PUT_LINE(v_letter || ':' || c%FOUND || ':' || c%ROWCOUNT);\n\n  CLOSE c;\nEND;\n/",
+    "answers": [
+      {
+        "text": "A:TRUE:1",
+        "isCorrect": true
+      },
+      {
+        "text": "A:FALSE:1",
+        "isCorrect": false
+      },
+      {
+        "text": "B:TRUE:1",
+        "isCorrect": false
+      },
+      {
+        "text": "A:TRUE:0",
+        "isCorrect": false
+      },
+      {
+        "text": "The block does not compile.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_categories with the columns category_id, category_name. It contains exactly three rows, and no row has category_name='UNKNOWN'.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  v_count NUMBER;\nBEGIN\n  SELECT COUNT(*) INTO v_count\n  FROM q19_categories\n  WHERE category_name = 'UNKNOWN';\n\n  IF v_count = 0 THEN\n    DBMS_OUTPUT.PUT_LINE('ZERO');\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('NONZERO');\n  END IF;\n\n  DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "ZERO\n0",
+        "isCorrect": false
+      },
+      {
+        "text": "ZERO\n1",
+        "isCorrect": true
+      },
+      {
+        "text": "NONZERO\n1",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises NO_DATA_FOUND.",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises TOO_MANY_ROWS.",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "question": "Assume SERVEROUTPUT is ON. Given table q19_members with the columns member_id, points. It contains exactly three rows: member_id=1 has 10 points, member_id=2 has 20 points, and member_id=3 has 30 points.\n\nWhat will this block display?\n\nCode:\nDECLARE\n  r q19_members%ROWTYPE;\nBEGIN\n  SELECT * INTO r\n  FROM q19_members\n  WHERE member_id = 2;\n\n  UPDATE q19_members\n  SET points = points + r.points\n  WHERE member_id <> r.member_id;\n\n  DBMS_OUTPUT.PUT_LINE(r.member_id || ':' || r.points || ':' || SQL%ROWCOUNT);\nEND;\n/",
+    "answers": [
+      {
+        "text": "2:20:2",
+        "isCorrect": true
+      },
+      {
+        "text": "2:40:2",
+        "isCorrect": false
+      },
+      {
+        "text": "2:20:1",
+        "isCorrect": false
+      },
+      {
+        "text": "1:20:2",
+        "isCorrect": false
+      },
+      {
+        "text": "The block raises TOO_MANY_ROWS.",
+        "isCorrect": false
+      }
+    ]
+  }
+]

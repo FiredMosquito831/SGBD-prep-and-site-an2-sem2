@@ -32,6 +32,8 @@ https://firedmosquito831.github.io/SGBD-prep-and-site-an2-sem2/
 - `sets_en/diaconita_2.json`: mirror for Diaconita 2.
 - `sets/diaconita_dedupped.json`: Diaconita dedupped compact set.
 - `sets_en/diaconita_dedupped.json`: mirror for the dedupped set.
+- `sets/simulare_diaconita_grile_eng.json`: 50-question Diaconita simulation set.
+- `sets_en/simulare_diaconita_grile_eng.json`: mirror for the simulation set.
 
 ## Current Set
 
@@ -47,10 +49,12 @@ Count:
 - `diaconita_1`: 39 questions
 - `diaconita_2`: 77 questions
 - `diaconita_dedupped`: 22 questions
+- `simulare_diaconita_grile_eng`: 50 questions
 - 96 single-correct questions
 - 72 multi-correct questions
 
 The current version mirrors the same fixed source JSON in both `sets/` and `sets_en/` until the final bilingual split is prepared.
+The active set list also includes `simulare_diaconita_grile_eng`, which is a 50-question simulation file mirrored into both language folders.
 
 ## Materials Library
 

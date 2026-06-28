@@ -5,7 +5,8 @@
     "sgbd_uploaded_master",
     "diaconita_1",
     "diaconita_2",
-    "diaconita_dedupped"
+    "diaconita_dedupped",
+    "simulare_diaconita_grile_eng"
   ],
   "defaultSet": "sgbd_uploaded_master",
   "links": {
@@ -78,6 +79,23 @@
         "all"
       ],
       "defaultCount": 10
+    },
+    "simulare_diaconita_grile_eng": {
+      "id": "simulare_diaconita_grile_eng",
+      "displayName": "Simulare Diaconita Grile Eng",
+      "shortName": "Simulare Eng",
+      "icon": "ph-clipboard-text",
+      "colorClass": "cyan",
+      "dataFile": "sets/simulare_diaconita_grile_eng.json",
+      "englishDataFile": "sets_en/simulare_diaconita_grile_eng.json",
+      "chapters": null,
+      "presets": [
+        10,
+        20,
+        50,
+        "all"
+      ],
+      "defaultCount": 20
     }
   }
 }
