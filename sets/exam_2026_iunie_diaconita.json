@@ -1,0 +1,343 @@
+{
+  "set_name": "exam 2026 iunie diaconita",
+  "format": "plsql_mcq_exam_set",
+  "question_count": 9,
+  "deduplication_note": "The repeated q17_clients question was included once.",
+  "questions": [
+    {
+      "id": 1,
+      "source_set": "exam 2026 iunie diaconita",
+      "source_images": [
+        "image_246c20.png",
+        "image_254955.jpg"
+      ],
+      "setup_sql": "CREATE TABLE q17_clients (\n  client_id NUMBER,\n  first_name VARCHAR2(30),\n  last_name VARCHAR2(30),\n  credit_limit NUMBER\n);\n\nINSERT INTO q17_clients VALUES (10, 'Ada', 'Lovelace', 500);\n\nCOMMIT;\n",
+      "question": "Assume SERVEROUTPUT is ON. Given table q17_clients with the columns client_id, first_name, last_name, credit_limit. It contains exactly one row with client_id=10, first_name='Ada', last_name='Lovelace', and credit_limit=500.\n\nWhat will this block display?",
+      "code": "DECLARE\n  r q17_clients%ROWTYPE;\nBEGIN\n  SELECT * INTO r\n  FROM q17_clients\n  WHERE client_id = 10;\n\n  r.credit_limit := r.credit_limit + 100;\n\n  UPDATE q17_clients\n  SET credit_limit = r.credit_limit\n  WHERE client_id = r.client_id;\n\n  DBMS_OUTPUT.PUT_LINE(r.first_name || ':' || SQL%ROWCOUNT || ':' || r.credit_limit);\nEND;\n/\n",
+      "answers": [
+        {
+          "label": "a",
+          "text": "Ada:1:500",
+          "isCorrect": false
+        },
+        {
+          "label": "b",
+          "text": "Ada:1:600",
+          "isCorrect": true
+        },
+        {
+          "label": "c",
+          "text": "Ada:0:600",
+          "isCorrect": false
+        },
+        {
+          "label": "d",
+          "text": "The block does not compile.",
+          "isCorrect": false
+        },
+        {
+          "label": "e",
+          "text": "Lovelace:1:600",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "source_set": "exam 2026 iunie diaconita",
+      "source_images": [
+        "image_2548ff.jpg"
+      ],
+      "setup_sql": "CREATE TABLE q17_students (\n  student_id NUMBER,\n  first_name VARCHAR2(30),\n  last_name VARCHAR2(30),\n  points NUMBER\n);\n\nINSERT INTO q17_students VALUES (1, 'Student', 'One', 80);\nINSERT INTO q17_students VALUES (2, 'Student', 'Two', NULL);\nINSERT INTO q17_students VALUES (3, 'Student', 'Three', 60);\n\nCOMMIT;\n",
+      "question": "Assume SERVEROUTPUT is ON. Given table q17_students with the columns student_id, first_name, last_name, points. It contains exactly these rows: student_id=1 has points=80, student_id=2 has points=NULL, and student_id=3 has points=60.\n\nWhat will this block display?",
+      "note": "The pasted text omitted student_id from the column list, but the rows and code both use student_id. The executable version includes student_id.",
+      "code": "DECLARE\n  v_points q17_students.points%TYPE;\nBEGIN\n  SELECT points INTO v_points\n  FROM q17_students\n  WHERE student_id = 2;\n\n  IF v_points < 70 THEN\n    DBMS_OUTPUT.PUT_LINE('LOW');\n  ELSIF v_points IS NULL THEN\n    DBMS_OUTPUT.PUT_LINE('MISSING');\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('OK');\n  END IF;\nEND;\n/\n",
+      "answers": [
+        {
+          "label": "a",
+          "text": "OK",
+          "isCorrect": false
+        },
+        {
+          "label": "b",
+          "text": "LOW",
+          "isCorrect": false
+        },
+        {
+          "label": "c",
+          "text": "The block does not compile.",
+          "isCorrect": false
+        },
+        {
+          "label": "d",
+          "text": "MISSING",
+          "isCorrect": true
+        },
+        {
+          "label": "e",
+          "text": "The block raises NO_DATA_FOUND.",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "source_set": "exam 2026 iunie diaconita",
+      "source_images": [
+        "image_25491e.png"
+      ],
+      "setup_sql": null,
+      "question": "Which statement about DML triggers is correct?",
+      "code": null,
+      "answers": [
+        {
+          "label": "a",
+          "text": "A statement-level trigger fires once for the triggering DML statement, even if the statement affects no rows.",
+          "isCorrect": true
+        },
+        {
+          "label": "b",
+          "text": "An INSTEAD OF trigger can be created only on ordinary tables, not on views.",
+          "isCorrect": false
+        },
+        {
+          "label": "c",
+          "text": "The block does not compile.",
+          "isCorrect": false
+        },
+        {
+          "label": "d",
+          "text": "A row-level trigger fires once for the triggering DML statement, regardless of how many rows are affected.",
+          "isCorrect": false
+        },
+        {
+          "label": "e",
+          "text": "OLD and NEW values are available in statement-level triggers exactly as in row-level triggers.",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "source_set": "exam 2026 iunie diaconita",
+      "source_images": [
+        "image_25493b.jpg"
+      ],
+      "setup_sql": "CREATE TABLE q17_projects (\n  project_id NUMBER,\n  project_code VARCHAR2(20),\n  status VARCHAR2(20)\n);\n\nINSERT INTO q17_projects VALUES (1, 'P1', 'NEW');\nINSERT INTO q17_projects VALUES (2, 'P2', 'NEW');\nINSERT INTO q17_projects VALUES (3, 'P3', 'DONE');\n\nCOMMIT;\n",
+      "question": "Assume SERVEROUTPUT is ON. Given table q17_projects with the columns project_id, project_code, status. It contains exactly three rows: two rows have status='NEW' and one row has status='DONE'.\n\nWhat will this block display?",
+      "code": "DECLARE\n  v_project_id q17_projects.project_id%TYPE;\nBEGIN\n  SELECT project_id INTO v_project_id\n  FROM q17_projects\n  WHERE status = 'NEW';\n\n  DBMS_OUTPUT.PUT_LINE('ID=' || v_project_id);\n\nEXCEPTION\n  WHEN TOO_MANY_ROWS THEN\n    DBMS_OUTPUT.PUT_LINE('MANY');\n  WHEN NO_DATA_FOUND THEN\n    DBMS_OUTPUT.PUT_LINE('NONE');\nEND;\n/\n",
+      "answers": [
+        {
+          "label": "a",
+          "text": "ID=NULL",
+          "isCorrect": false
+        },
+        {
+          "label": "b",
+          "text": "The block does not compile.",
+          "isCorrect": false
+        },
+        {
+          "label": "c",
+          "text": "The first NEW project_id is displayed.",
+          "isCorrect": false
+        },
+        {
+          "label": "d",
+          "text": "NONE",
+          "isCorrect": false
+        },
+        {
+          "label": "e",
+          "text": "MANY",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "source_set": "exam 2026 iunie diaconita",
+      "source_images": [
+        "image_25495a.jpg"
+      ],
+      "setup_sql": "CREATE TABLE q17_invoices (\n  customer_code VARCHAR2(20),\n  invoice_amount NUMBER,\n  paid_flag VARCHAR2(1)\n);\n\nINSERT INTO q17_invoices VALUES ('C1', 100, 'Y');\nINSERT INTO q17_invoices VALUES ('C1', 200, 'N');\n\nCOMMIT;\n",
+      "question": "Assume SERVEROUTPUT is ON. Given table q17_invoices with the columns customer_code, invoice_amount, paid_flag. It contains rows only for customer_code='C1'.\n\nWhat will this block display?",
+      "code": "DECLARE\n  v_total NUMBER;\nBEGIN\n  SELECT SUM(invoice_amount) INTO v_total\n  FROM q17_invoices\n  WHERE customer_code = 'C9';\n\n  IF v_total IS NULL THEN\n    DBMS_OUTPUT.PUT_LINE('NO SUM');\n  ELSE\n    DBMS_OUTPUT.PUT_LINE('TOTAL=' || v_total);\n  END IF;\n\nEXCEPTION\n  WHEN NO_DATA_FOUND THEN\n    DBMS_OUTPUT.PUT_LINE('NO DATA');\nEND;\n/\n",
+      "answers": [
+        {
+          "label": "a",
+          "text": "The block raises TOO_MANY_ROWS.",
+          "isCorrect": false
+        },
+        {
+          "label": "b",
+          "text": "NO SUM",
+          "isCorrect": true
+        },
+        {
+          "label": "c",
+          "text": "The block does not compile.",
+          "isCorrect": false
+        },
+        {
+          "label": "d",
+          "text": "TOTAL=0",
+          "isCorrect": false
+        },
+        {
+          "label": "e",
+          "text": "NO DATA",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "source_set": "exam 2026 iunie diaconita",
+      "source_images": [
+        "image_254973.png"
+      ],
+      "setup_sql": "CREATE TABLE q17_codes (\n  code_id NUMBER,\n  code_text VARCHAR2(30),\n  priority NUMBER\n);\n\nINSERT INTO q17_codes VALUES (1, 'A', 2);\nINSERT INTO q17_codes VALUES (2, 'B', 1);\n\nCOMMIT;\n",
+      "question": "Assume SERVEROUTPUT is ON. Given table q17_codes with the columns code_id, code_text, priority. It contains at least one row.\n\nWhat is true about this block?",
+      "code": "DECLARE\n  CURSOR c IS\n    SELECT code_text FROM q17_codes ORDER BY priority;\nBEGIN\n  FOR r IN c LOOP\n    NULL;\n  END LOOP;\n\n  DBMS_OUTPUT.PUT_LINE(r.code_text);\nEND;\n/\n",
+      "answers": [
+        {
+          "label": "a",
+          "text": "It displays NULL.",
+          "isCorrect": false
+        },
+        {
+          "label": "b",
+          "text": "It displays the last code_text.",
+          "isCorrect": false
+        },
+        {
+          "label": "c",
+          "text": "It displays the first code_text.",
+          "isCorrect": false
+        },
+        {
+          "label": "d",
+          "text": "The block does not compile.",
+          "isCorrect": true
+        },
+        {
+          "label": "e",
+          "text": "It raises NO_DATA_FOUND at run time.",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "source_set": "exam 2026 iunie diaconita",
+      "source_images": [
+        "image_25497a.png"
+      ],
+      "setup_sql": null,
+      "question": "Assume SERVEROUTPUT is ON. What will this block display?",
+      "code": "DECLARE\n  TYPE t_vec IS VARRAY(3) OF NUMBER;\n  v_vec t_vec := t_vec();\nBEGIN\n  v_vec.EXTEND(3);\n  v_vec(1) := 10;\n  v_vec(2) := 20;\n  v_vec(3) := 30;\n  v_vec.TRIM;\n  DBMS_OUTPUT.PUT_LINE(v_vec.COUNT || ':' || v_vec.LIMIT);\nEND;\n/\n",
+      "answers": [
+        {
+          "label": "a",
+          "text": "2:3",
+          "isCorrect": true
+        },
+        {
+          "label": "b",
+          "text": "3:2",
+          "isCorrect": false
+        },
+        {
+          "label": "c",
+          "text": "2:2",
+          "isCorrect": false
+        },
+        {
+          "label": "d",
+          "text": "3:3",
+          "isCorrect": false
+        },
+        {
+          "label": "e",
+          "text": "The block does not compile.",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "source_set": "exam 2026 iunie diaconita",
+      "source_images": [
+        "image_246ec8.png"
+      ],
+      "setup_sql": null,
+      "question": "Assume SERVEROUTPUT is ON. What will this block display?",
+      "code": "DECLARE\n  CURSOR c IS SELECT 1 AS n FROM dual;\nBEGIN\n  OPEN c;\n  OPEN c;\n  CLOSE c;\n  DBMS_OUTPUT.PUT_LINE('DONE');\n\nEXCEPTION\n  WHEN CURSOR_ALREADY_OPEN THEN\n    DBMS_OUTPUT.PUT_LINE('OPEN');\nEND;\n/\n",
+      "answers": [
+        {
+          "label": "a",
+          "text": "The block raises NO_DATA_FOUND.",
+          "isCorrect": false
+        },
+        {
+          "label": "b",
+          "text": "DONE",
+          "isCorrect": false
+        },
+        {
+          "label": "c",
+          "text": "1",
+          "isCorrect": false
+        },
+        {
+          "label": "d",
+          "text": "OPEN",
+          "isCorrect": true
+        },
+        {
+          "label": "e",
+          "text": "The block does not compile.",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "source_set": "exam 2026 iunie diaconita",
+      "source_images": [
+        "image_246ee6.png"
+      ],
+      "setup_sql": "CREATE TABLE q17_payments (\n  payment_id NUMBER,\n  customer_code VARCHAR2(20),\n  amount NUMBER,\n  status VARCHAR2(20)\n);\n\nINSERT INTO q17_payments VALUES (1, 'C1', 100, 'OPEN');\nINSERT INTO q17_payments VALUES (2, 'C2', 200, 'OPEN');\nINSERT INTO q17_payments VALUES (3, 'C3', 300, 'CLOSED');\n\nCOMMIT;\n",
+      "question": "Assume SERVEROUTPUT is ON. Given table q17_payments with the columns payment_id, customer_code, amount, status. It contains exactly three rows: two rows have status='OPEN' and one row has status='CLOSED'.\n\nWhat will this block display?",
+      "code": "DECLARE\n  v_count NUMBER;\nBEGIN\n  SELECT COUNT(*) INTO v_count\n  FROM q17_payments\n  WHERE status = 'OPEN';\n\n  DBMS_OUTPUT.PUT_LINE(v_count || ':' || SQL%ROWCOUNT);\nEND;\n/\n",
+      "answers": [
+        {
+          "label": "a",
+          "text": "2:1",
+          "isCorrect": true
+        },
+        {
+          "label": "b",
+          "text": "1:2",
+          "isCorrect": false
+        },
+        {
+          "label": "c",
+          "text": "The block does not compile.",
+          "isCorrect": false
+        },
+        {
+          "label": "d",
+          "text": "2:2",
+          "isCorrect": false
+        },
+        {
+          "label": "e",
+          "text": "0:1",
+          "isCorrect": false
+        }
+      ]
+    }
+  ]
+}

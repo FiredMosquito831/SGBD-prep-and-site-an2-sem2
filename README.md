@@ -35,6 +35,8 @@ https://firedmosquito831.github.io/SGBD-prep-and-site-an2-sem2/
 - `sets_en/diaconita_dedupped.json`: mirror for the dedupped set.
 - `sets/simulare_diaconita_grile_eng.json`: 50-question Diaconita simulation set.
 - `sets_en/simulare_diaconita_grile_eng.json`: mirror for the simulation set.
+- `sets/exam_2026_iunie_diaconita.json`: 9-question June 2026 Diaconita exam set.
+- `sets_en/exam_2026_iunie_diaconita.json`: mirror for the exam set.
 
 ## Current Set
 
@@ -51,11 +53,13 @@ Count:
 - `diaconita_2`: 77 questions
 - `diaconita_dedupped`: 22 questions
 - `simulare_diaconita_grile_eng`: 50 questions
-- 96 single-correct questions
+- `exam_2026_iunie_diaconita`: 9 questions
+- 105 single-correct questions
 - 72 multi-correct questions
 
 The current version mirrors the same fixed source JSON in both `sets/` and `sets_en/` until the final bilingual split is prepared.
 The active set list also includes `simulare_diaconita_grile_eng`, which is a 50-question simulation file mirrored into both language folders.
+The newest addition is `exam_2026_iunie_diaconita`, a 9-question exam-style set mirrored into both language folders.
 
 ## Materials Library
 

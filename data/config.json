@@ -6,7 +6,8 @@
     "diaconita_1",
     "diaconita_2",
     "diaconita_dedupped",
-    "simulare_diaconita_grile_eng"
+    "simulare_diaconita_grile_eng",
+    "exam_2026_iunie_diaconita"
   ],
   "defaultSet": "sgbd_uploaded_master",
   "links": {
@@ -96,6 +97,23 @@
         "all"
       ],
       "defaultCount": 20
+    },
+    "exam_2026_iunie_diaconita": {
+      "id": "exam_2026_iunie_diaconita",
+      "displayName": "Exam 2026 Iunie Diaconita",
+      "shortName": "Exam 2026",
+      "icon": "ph-file-text",
+      "colorClass": "teal",
+      "dataFile": "sets/exam_2026_iunie_diaconita.json",
+      "englishDataFile": "sets_en/exam_2026_iunie_diaconita.json",
+      "chapters": null,
+      "presets": [
+        3,
+        5,
+        9,
+        "all"
+      ],
+      "defaultCount": 5
     }
   }
 }
